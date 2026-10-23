@@ -1,0 +1,1020 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#123b2c" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="color-scheme" content="light" />
+  <title>AgriHub Pintar — Pasar Hasil Panen & Catatan Usaha Tani</title>
+  <meta name="description" content="AgriHub Pintar membantu petani menjual hasil panen, menemukan alat pertanian, menghitung keuntungan, dan mencatat usaha tani dalam satu platform yang mudah digunakan." />
+  <meta name="keywords" content="AgriHub Pintar, jual beli hasil panen, marketplace pertanian, alat pertanian, alsintan, kalkulator keuntungan tani, catatan usaha tani, petani Indonesia" />
+  <meta name="author" content="AgriHub Pintar" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://agrihubpintar.example/" />
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="id_ID" />
+  <meta property="og:site_name" content="AgriHub Pintar" />
+  <meta property="og:title" content="AgriHub Pintar — Panen Lebih Untung, Usaha Lebih Terukur" />
+  <meta property="og:description" content="Temukan pembeli hasil panen, alat pertanian modern, dan kelola catatan usaha tani dalam satu tempat." />
+  <meta property="og:url" content="https://agrihubpintar.example/" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&h=630&q=85" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Lahan pertanian hijau sebagai ilustrasi AgriHub Pintar" />
+
+  <!-- X / Twitter cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AgriHub Pintar — Panen Lebih Untung, Usaha Lebih Terukur" />
+  <meta name="twitter:description" content="Marketplace pertanian, kalkulator keuntungan, dan catatan usaha tani dalam satu platform." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&h=630&q=85" />
+
+  <!-- Structured data for search engines. Replace the .example domain before launch. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "AgriHub Pintar",
+    "url": "https://agrihubpintar.example/",
+    "description": "Marketplace hasil panen dan alat pertanian yang dilengkapi kalkulator keuntungan serta pencatatan usaha tani.",
+    "inLanguage": "id-ID",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://agrihubpintar.example/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: { 50: '#f0f7f2', 100: '#dcece0', 200: '#b8d9c1', 300: '#87bd96', 400: '#549e6b', 500: '#328250', 600: '#226841', 700: '#1d5336', 800: '#19432e', 900: '#153827', 950: '#0b2117' },
+            harvest: { 100: '#fff4d6', 300: '#f4cb72', 400: '#eeb74d', 500: '#d99a2b' }
+          },
+          fontFamily: { sans: ['DM Sans', 'sans-serif'], display: ['Manrope', 'sans-serif'] },
+          boxShadow: { soft: '0 12px 40px rgba(20, 52, 36, .08)', lift: '0 22px 60px rgba(20, 52, 36, .14)' }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root { --forest: #153827; --green: #226841; --canvas: #f8faf7; --ink: #183528; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+    body { margin: 0; background: var(--canvas); color: var(--ink); font-family: 'DM Sans', sans-serif; }
+    body.modal-open { overflow: hidden; }
+    h1,h2,h3,h4,.font-display { font-family: 'Manrope', sans-serif; }
+    ::selection { background: #c9e7cf; color: #153827; }
+    .site-grid { background-image: radial-gradient(rgba(255,255,255,.13) 1px, transparent 1px); background-size: 17px 17px; }
+    .hero-glow { background: radial-gradient(ellipse at 80% 22%, rgba(132, 190, 116, .24), transparent 38%), radial-gradient(ellipse at 20% 100%, rgba(246, 197, 99, .12), transparent 34%); }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .08s; } .reveal-delay-2 { transition-delay: .16s; } .reveal-delay-3 { transition-delay: .24s; }
+    .product-card { transition: transform .24s ease, box-shadow .24s ease, border-color .24s ease; }
+    .product-card:hover { transform: translateY(-5px); box-shadow: 0 18px 44px rgba(20,52,36,.11); border-color: #c7dfcd; }
+    .product-image { transition: transform .55s cubic-bezier(.2,.7,.2,1); }
+    .product-card:hover .product-image { transform: scale(1.055); }
+    .category-button { transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease; }
+    .category-button.active { background: #153827; border-color: #153827; color: white; box-shadow: 0 5px 15px rgba(21,56,39,.12); }
+    .category-button:active, button:active { transform: scale(.985); }
+    .field { width:100%; border:1px solid #dce5dc; background:#fff; color:#183528; border-radius:12px; padding:11px 13px; outline:none; transition:border-color .2s, box-shadow .2s; }
+    .field:focus { border-color:#4f9364; box-shadow:0 0 0 3px rgba(79,147,100,.14); }
+    .field::placeholder { color:#9aa89e; }
+    .btn-primary { background:#226841; color:white; transition:background .2s, transform .2s, box-shadow .2s; }
+    .btn-primary:hover { background:#194e33; box-shadow:0 8px 20px rgba(34,104,65,.18); }
+    .btn-dark { background:#153827; color:white; transition:background .2s, transform .2s; }
+    .btn-dark:hover { background:#0b2117; }
+    .btn-outline { border:1px solid #dbe5dc; color:#244533; background:white; transition:border-color .2s, background .2s; }
+    .btn-outline:hover { border-color:#9dbda5; background:#f3f8f4; }
+    .modal-backdrop { opacity:0; visibility:hidden; transition:opacity .2s, visibility .2s; }
+    .modal-backdrop.open { opacity:1; visibility:visible; }
+    .modal-panel { transform:translateY(14px) scale(.99); transition:transform .24s cubic-bezier(.2,.7,.2,1); }
+    .modal-backdrop.open .modal-panel { transform:translateY(0) scale(1); }
+    .drawer { transform:translateX(102%); transition:transform .3s cubic-bezier(.2,.7,.2,1); }
+    .drawer.open { transform:translateX(0); }
+    .drawer-overlay { opacity:0; visibility:hidden; transition:opacity .2s, visibility .2s; }
+    .drawer-overlay.open { opacity:1; visibility:visible; }
+    .toast { opacity:0; transform:translateY(10px); pointer-events:none; transition:opacity .22s, transform .22s; }
+    .toast.show { opacity:1; transform:translateY(0); }
+    .line-clamp-2 { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    .no-scrollbar::-webkit-scrollbar { display:none; } .no-scrollbar { scrollbar-width:none; }
+    .focus-ring:focus-visible { outline:3px solid #eeb74d; outline-offset:3px; }
+    /* Auth experience: a single animated login/register surface */
+    .auth-screen[hidden], .dashboard-screen[hidden] { display:none !important; }
+    .auth-screen { position:fixed; inset:0; z-index:70; display:flex; align-items:center; justify-content:center; overflow-y:auto; padding:24px; background:rgba(9,29,19,.72); backdrop-filter:blur(10px); animation:screenFadeIn .25s ease both; }
+    .auth-card { position:relative; width:min(100%,1000px); min-height:640px; overflow:hidden; border:1px solid rgba(255,255,255,.8); border-radius:30px; background:#fff; box-shadow:0 32px 100px rgba(3,20,11,.35); }
+    .auth-pane { position:absolute; top:0; width:50%; height:100%; overflow-y:auto; padding:52px 44px 36px; transition:opacity .38s ease,transform .48s cubic-bezier(.2,.7,.2,1); }
+    .auth-login-pane { left:0; opacity:1; transform:translateX(0); pointer-events:auto; }
+    .auth-register-pane { left:50%; opacity:0; transform:translateX(26px); pointer-events:none; }
+    .auth-card.register-mode .auth-login-pane { opacity:0; transform:translateX(-26px); pointer-events:none; }
+    .auth-card.register-mode .auth-register-pane { opacity:1; transform:translateX(0); pointer-events:auto; }
+    .auth-showcase { position:absolute; top:0; bottom:0; left:50%; z-index:3; display:flex; width:50%; align-items:center; justify-content:center; overflow:hidden; padding:46px; color:#fff; background:radial-gradient(ellipse at 15% 10%,rgba(148,202,125,.28),transparent 40%),radial-gradient(ellipse at 95% 95%,rgba(238,183,77,.17),transparent 35%),#153827; transition:left .58s cubic-bezier(.2,.7,.2,1); }
+    .auth-showcase::before,.auth-showcase::after { position:absolute; content:""; border:1px solid rgba(255,255,255,.13); border-radius:999px; pointer-events:none; }
+    .auth-showcase::before { width:370px;height:370px;right:-155px;top:-100px; }
+    .auth-showcase::after { width:270px;height:270px;left:-145px;bottom:-85px; }
+    .auth-card.register-mode .auth-showcase { left:0; }
+    .auth-promo { position:relative; z-index:1; max-width:350px; text-align:left; animation:promoIn .42s ease both; }
+    .auth-promo[hidden] { display:none !important; }
+    .auth-close { position:absolute; top:16px; right:16px; z-index:5; display:grid; width:38px;height:38px;place-items:center;border:1px solid #e0e9e1;border-radius:12px;color:#53665a;background:rgba(255,255,255,.92);transition:background .2s,transform .2s; }
+    .auth-close:hover { background:#f1f7f2;transform:rotate(5deg); }
+    .auth-switch { display:inline-flex; align-items:center; justify-content:center; gap:8px; border:1px solid rgba(255,255,255,.55); border-radius:13px; padding:11px 17px; font-size:13px;font-weight:800;color:white;background:rgba(255,255,255,.08);transition:background .2s,transform .2s; }
+    .auth-switch:hover { background:rgba(255,255,255,.17);transform:translateY(-1px); }
+    .auth-feedback { display:none; border:1px solid #fecaca; border-radius:12px;background:#fff1f2;color:#9f1239;padding:10px 12px;font-size:12px;line-height:1.5; }
+    .auth-feedback.show { display:block;animation:promoIn .2s ease both; }
+    .demo-login-btn { display:flex;min-width:0;align-items:center;gap:8px;border:1px solid #dce7dd;border-radius:11px;padding:9px 10px;color:#31543c;background:#fff;font-size:11px;font-weight:800;transition:border-color .2s,background .2s; }
+    .demo-login-btn:hover { border-color:#94baa0;background:#f5faf5; }
+    .dashboard-screen { position:fixed; inset:0; z-index:70; overflow:auto; background:#f5f8f4; animation:screenFadeIn .25s ease both; }
+    .dashboard-layout { display:flex; min-height:100%; }
+    .dashboard-sidebar { position:relative;display:flex;flex:0 0 258px;flex-direction:column;gap:22px;border-right:1px solid #e0e9df;background:#fff;padding:24px 16px; }
+    .dashboard-brand { display:flex;align-items:center;gap:10px;padding:0 7px; }
+    .dashboard-profile { display:flex;align-items:center;gap:11px;border:1px solid #e6eee5;border-radius:17px;background:#f8fbf7;padding:13px; }
+    .dashboard-avatar { display:grid;flex:0 0 40px;width:40px;height:40px;place-items:center;border-radius:13px;background:#dcece0;color:#19432e;font-weight:900; }
+    .dashboard-nav { display:flex;flex-direction:column;gap:5px; }
+    .dashboard-nav button { display:flex;align-items:center;gap:11px;width:100%;border:1px solid transparent;border-radius:12px;padding:12px;color:#647468;text-align:left;font-size:13px;font-weight:700;transition:background .2s,color .2s,border-color .2s; }
+    .dashboard-nav button:hover { background:#f4f8f3;color:#19432e; }
+    .dashboard-nav button.active { border-color:#dcece0;background:#edf6ee;color:#19432e; }
+    .dashboard-nav button.active i { color:#328250; }
+    .dashboard-workspace { flex:1;min-width:0; }
+    .dashboard-topbar { display:flex;min-height:104px;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid #e1e9df;background:rgba(255,255,255,.82);padding:23px clamp(18px,3vw,42px); }
+    .dashboard-content { max-width:1500px;margin:0 auto;padding:28px clamp(16px,3vw,42px) 50px; }
+    .dashboard-stat { border:1px solid #e1e9df;border-radius:20px;background:#fff;padding:19px;box-shadow:0 5px 18px rgba(20,52,36,.025); }
+    .dashboard-table-wrap { overflow-x:auto;border:1px solid #e1e9df;border-radius:17px;background:#fff; }
+    .dashboard-table { width:100%;border-collapse:collapse;white-space:nowrap; }
+    .dashboard-table th { padding:12px 15px;background:#f8faf7;color:#718075;text-align:left;font-size:10px;font-weight:900;letter-spacing:.8px;text-transform:uppercase; }
+    .dashboard-table td { border-top:1px solid #edf2eb;padding:13px 15px;color:#3f5647;font-size:12px; }
+    .dashboard-section-card { border:1px solid #e1e9df;border-radius:20px;background:#fff;padding:20px; }
+    .dashboard-action { display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid #dce7dd;border-radius:10px;background:white;padding:8px 11px;color:#31543c;font-size:11px;font-weight:800;transition:background .2s,border-color .2s; }
+    .dashboard-action:hover { border-color:#9cbea4;background:#f2f8f2; }
+    .dashboard-action.danger { border-color:#fee2e2;color:#be123c;background:#fff; }
+    .dashboard-action.danger:hover { background:#fff1f2; }
+    @keyframes screenFadeIn { from {opacity:0} to {opacity:1} }
+    @keyframes promoIn { from {opacity:0;transform:translateY(9px)} to {opacity:1;transform:translateY(0)} }
+    @media (max-width:850px) { .auth-screen { padding:12px; } .auth-card { min-height:620px; } .auth-pane { padding:48px 27px 28px; } .auth-showcase { padding:28px; } .dashboard-sidebar { flex-basis:220px; } }
+    @media (max-width:700px) { .auth-screen { align-items:flex-start;padding:10px; } .auth-card { min-height:0;border-radius:23px; } .auth-pane { position:relative;left:0;width:100%;height:auto;min-height:530px;padding:48px 23px 27px; } .auth-login-pane { display:block; } .auth-register-pane { display:none; }
+      .auth-card.register-mode .auth-login-pane { display:none; } .auth-card.register-mode .auth-register-pane { display:block; }
+      .auth-showcase { position:relative;left:auto;width:100%;min-height:205px;padding:25px 24px;transition:none; } .auth-card.register-mode .auth-showcase { left:auto; } .auth-promo { max-width:none; } .auth-promo h2 { font-size:24px !important; } .auth-showcase::before { width:230px;height:230px;right:-100px;top:-70px; } .auth-showcase::after { width:180px;height:180px;left:-100px;bottom:-65px; }
+      .dashboard-layout { display:flex;flex-direction:column; } .dashboard-sidebar { flex:0 0 auto;gap:14px;border-right:0;border-bottom:1px solid #e0e9df;padding:15px 14px 12px; } .dashboard-brand { padding:0 3px; } .dashboard-profile { display:none; } .dashboard-nav { flex-direction:row;overflow-x:auto;padding-bottom:3px; } .dashboard-nav button { flex:0 0 auto;width:auto;white-space:nowrap;padding:10px 12px; } .dashboard-sidebar-note { display:none; } .dashboard-topbar { align-items:flex-start;flex-direction:column;padding:19px 16px; } .dashboard-content { padding:18px 14px 35px; } }
+    @media (prefers-reduced-motion: reduce) { .auth-screen,.auth-promo,.auth-feedback,.dashboard-screen { animation:none !important; } .auth-showcase,.auth-pane { transition:none !important; } }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-xl focus:bg-white focus:px-4 focus:py-3 focus:shadow-lg">Lewati ke konten utama</a>
+
+  <!-- Navigation -->
+  <header id="top" class="sticky top-0 z-40 border-b border-forest-100/80 bg-white/90 backdrop-blur-xl">
+    <div class="mx-auto flex h-[76px] max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:px-10">
+      <a href="#top" class="flex shrink-0 items-center gap-2.5 rounded-xl focus-ring" aria-label="AgriHub Pintar, beranda">
+        <span class="grid h-10 w-10 place-items-center rounded-[14px] bg-forest-800 text-harvest-300 shadow-sm">
+          <svg viewBox="0 0 24 24" fill="none" class="h-6 w-6" aria-hidden="true"><path d="M19.5 4.5C11 4.5 5 7.6 5 14.1c0 3.1 2.3 5.4 5.4 5.4 6.5 0 9.1-6.7 9.1-15Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M3.5 21c2.2-5 6.3-8.6 12-11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </span>
+        <span class="leading-tight"><span class="block font-display text-[17px] font-extrabold tracking-[-.7px] text-forest-900">AgriHub<span class="text-forest-500"> Pintar</span></span><span class="mt-0.5 block text-[10px] font-semibold uppercase tracking-[1.8px] text-slate-400">Tumbuh bersama petani</span></span>
+      </a>
+
+      <nav class="hidden items-center gap-7 lg:flex" aria-label="Navigasi utama">
+        <a class="text-sm font-semibold text-forest-900 hover:text-forest-500" href="#marketplace">Marketplace</a>
+        <a class="text-sm font-medium text-slate-600 hover:text-forest-600" href="#keunggulan">Keunggulan</a>
+        <a class="text-sm font-medium text-slate-600 hover:text-forest-600" href="#kalkulator">Kalkulator tani</a>
+        <a class="text-sm font-medium text-slate-600 hover:text-forest-600" href="#catatan">Catatan usaha</a>
+      </nav>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <button id="account-button" class="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-forest-800 px-3.5 text-xs font-extrabold text-white shadow-sm transition hover:bg-forest-950 focus-ring sm:px-4 sm:text-sm" type="button"><i data-lucide="user-round" class="h-4 w-4"></i><span id="account-button-label" class="hidden sm:inline">Masuk / Daftar</span></button>
+        <button id="favorites-shortcut" class="relative hidden h-10 w-10 items-center justify-center rounded-xl text-slate-600 hover:bg-forest-50 hover:text-forest-700 sm:flex focus-ring" aria-label="Lihat produk favorit" title="Favorit">
+          <i data-lucide="heart" class="h-[19px] w-[19px]"></i><span id="favorite-count" class="absolute right-1 top-1 hidden min-w-[16px] rounded-full bg-rose-500 px-1 text-center text-[9px] font-bold leading-4 text-white">0</span>
+        </button>
+        <button id="cart-button" class="relative flex h-10 items-center gap-2 rounded-xl border border-forest-100 px-3 text-sm font-bold text-forest-900 hover:bg-forest-50 focus-ring" aria-label="Buka keranjang belanja">
+          <i data-lucide="shopping-bag" class="h-[18px] w-[18px]"></i><span class="hidden sm:inline">Keranjang</span><span id="cart-count" class="grid h-[19px] min-w-[19px] place-items-center rounded-full bg-harvest-300 px-1 text-[10px] font-extrabold text-forest-950">0</span>
+        </button>
+        <button id="mobile-menu-button" class="grid h-10 w-10 place-items-center rounded-xl text-forest-900 hover:bg-forest-50 focus-ring lg:hidden" aria-label="Buka menu" aria-expanded="false"><i data-lucide="menu" class="h-5 w-5"></i></button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden border-t border-forest-100 bg-white px-5 py-4 lg:hidden">
+      <nav class="mx-auto flex max-w-6xl flex-col gap-1" aria-label="Navigasi seluler">
+        <a class="rounded-xl px-3 py-3 text-sm font-semibold hover:bg-forest-50" href="#marketplace">Marketplace</a><a class="rounded-xl px-3 py-3 text-sm font-medium hover:bg-forest-50" href="#keunggulan">Keunggulan</a><a class="rounded-xl px-3 py-3 text-sm font-medium hover:bg-forest-50" href="#kalkulator">Kalkulator tani</a><a class="rounded-xl px-3 py-3 text-sm font-medium hover:bg-forest-50" href="#catatan">Catatan usaha</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="relative isolate overflow-hidden bg-forest-950 text-white">
+      <div class="hero-glow site-grid absolute inset-0 -z-10"></div>
+      <div class="absolute -right-28 -top-32 -z-10 h-[440px] w-[440px] rounded-full border border-white/10"></div><div class="absolute -right-12 -top-16 -z-10 h-[300px] w-[300px] rounded-full border border-white/10"></div>
+      <div class="mx-auto grid max-w-[1440px] items-center gap-10 px-4 pb-14 pt-12 sm:px-6 sm:pb-20 sm:pt-16 lg:grid-cols-[1.05fr_.95fr] lg:gap-16 lg:px-10 lg:pb-24 lg:pt-20">
+        <div class="reveal is-visible relative z-10">
+          <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.07] px-3.5 py-2 text-xs font-semibold text-forest-100 backdrop-blur-sm"><span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-300 opacity-60"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-300"></span></span>Ekosistem digital untuk petani Indonesia</div>
+          <h1 class="max-w-[690px] font-display text-[38px] font-extrabold leading-[1.12] tracking-[-1.8px] sm:text-5xl lg:text-[60px] lg:leading-[1.09]">Panen lebih untung.<br /><span class="text-harvest-300">Usaha lebih terukur.</span></h1>
+          <p class="mt-6 max-w-[560px] text-[15px] leading-7 text-forest-100/80 sm:text-base sm:leading-8">Satu tempat untuk menjual hasil panen, mencari alat pertanian, dan memahami keuntungan usaha tani—lebih mudah, transparan, dan praktis.</p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="#marketplace" class="btn-primary inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-lg shadow-black/10 focus-ring">Jelajahi marketplace <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
+            <a href="#kalkulator" class="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/[.06] px-5 py-3 text-sm font-bold text-white hover:bg-white/10 focus-ring"><i data-lucide="calculator" class="h-4 w-4"></i> Hitung keuntungan</a>
+          </div>
+          <div class="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs font-medium text-forest-100/75"><span class="inline-flex items-center gap-2"><i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-300"></i>Data usaha tersimpan lokal</span><span class="inline-flex items-center gap-2"><i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-300"></i>Transparan & mudah digunakan</span></div>
+        </div>
+
+        <div class="reveal reveal-delay-2 relative mx-auto w-full max-w-[580px] lg:ml-auto">
+          <div class="absolute -left-5 top-12 hidden rounded-2xl border border-white/30 bg-white px-4 py-3 text-forest-900 shadow-lift sm:block"><div class="flex items-center gap-3"><span class="grid h-9 w-9 place-items-center rounded-xl bg-emerald-50 text-emerald-700"><i data-lucide="trending-up" class="h-5 w-5"></i></span><span><span class="block text-[10px] font-semibold text-slate-500">Contoh laba usaha</span><span class="mt-0.5 block text-sm font-extrabold">Rp 3.250.000</span></span></div></div>
+          <div class="overflow-hidden rounded-[26px] border border-white/20 bg-white p-3 shadow-2xl shadow-black/25 sm:rounded-[30px] sm:p-4">
+            <div class="relative overflow-hidden rounded-[20px] bg-forest-100"><img class="h-[220px] w-full object-cover sm:h-[290px]" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1100&q=85" alt="Pemandangan lahan pertanian hijau" fetchpriority="high" /><div class="absolute inset-0 bg-gradient-to-t from-forest-950/65 via-transparent to-transparent"></div><div class="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3 text-white sm:bottom-5 sm:left-5 sm:right-5"><div><span class="mb-1 block text-[10px] font-bold uppercase tracking-[1.6px] text-white/75">Dashboard usaha tani</span><span class="font-display text-xl font-extrabold sm:text-2xl">Tumbuh setiap musim</span></div><span class="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-white/20 bg-white/15 backdrop-blur-md"><i data-lucide="sprout" class="h-5 w-5"></i></span></div></div>
+            <div class="grid grid-cols-3 gap-2.5 py-4 sm:gap-3 sm:py-5">
+              <div class="rounded-2xl bg-[#f6f8f3] p-3 sm:p-4"><span class="grid h-8 w-8 place-items-center rounded-xl bg-emerald-100 text-emerald-800"><i data-lucide="wheat" class="h-4 w-4"></i></span><span class="mt-3 block text-[10px] font-semibold text-slate-500 sm:text-xs">Komoditas</span><span class="mt-1 block font-display text-base font-extrabold sm:text-xl">4+</span></div>
+              <div class="rounded-2xl bg-[#f6f8f3] p-3 sm:p-4"><span class="grid h-8 w-8 place-items-center rounded-xl bg-amber-100 text-amber-800"><i data-lucide="calculator" class="h-4 w-4"></i></span><span class="mt-3 block text-[10px] font-semibold text-slate-500 sm:text-xs">Hitung laba</span><span class="mt-1 block font-display text-base font-extrabold sm:text-xl">Otomatis</span></div>
+              <div class="rounded-2xl bg-[#f6f8f3] p-3 sm:p-4"><span class="grid h-8 w-8 place-items-center rounded-xl bg-sky-100 text-sky-800"><i data-lucide="clipboard-list" class="h-4 w-4"></i></span><span class="mt-3 block text-[10px] font-semibold text-slate-500 sm:text-xs">Catatan</span><span class="mt-1 block font-display text-base font-extrabold sm:text-xl">Praktis</span></div>
+            </div>
+          </div>
+          <div class="absolute -bottom-5 right-7 hidden rounded-2xl border border-forest-100 bg-white px-4 py-3 shadow-soft sm:block"><div class="flex items-center gap-2.5"><span class="grid h-9 w-9 place-items-center rounded-xl bg-amber-50 text-amber-700"><i data-lucide="shield-check" class="h-5 w-5"></i></span><span class="text-xs font-bold leading-5 text-forest-900">Kelola usaha<br />dengan lebih yakin</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust / feature strip -->
+    <section class="border-b border-forest-100 bg-white">
+      <div class="mx-auto grid max-w-[1440px] grid-cols-2 gap-y-5 px-4 py-6 sm:px-6 md:grid-cols-4 lg:px-10 lg:py-7">
+        <div class="flex items-center gap-3"><span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-forest-50 text-forest-700"><i data-lucide="handshake" class="h-[19px] w-[19px]"></i></span><span><span class="block text-sm font-bold">Pasar lebih luas</span><span class="mt-0.5 block text-xs text-slate-500">Temukan calon pembeli</span></span></div>
+        <div class="flex items-center gap-3"><span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-amber-50 text-amber-700"><i data-lucide="tractor" class="h-[19px] w-[19px]"></i></span><span><span class="block text-sm font-bold">Alat pertanian</span><span class="mt-0.5 block text-xs text-slate-500">Cari alat sesuai kebutuhan</span></span></div>
+        <div class="flex items-center gap-3"><span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-sky-50 text-sky-700"><i data-lucide="calculator" class="h-[19px] w-[19px]"></i></span><span><span class="block text-sm font-bold">Hitung keuntungan</span><span class="mt-0.5 block text-xs text-slate-500">Perkirakan laba usaha</span></span></div>
+        <div class="flex items-center gap-3"><span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-violet-50 text-violet-700"><i data-lucide="notebook-pen" class="h-[19px] w-[19px]"></i></span><span><span class="block text-sm font-bold">Catatan digital</span><span class="mt-0.5 block text-xs text-slate-500">Pantau biaya & pendapatan</span></span></div>
+      </div>
+    </section>
+
+    <!-- Marketplace -->
+    <section id="marketplace" class="scroll-mt-24 py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10">
+        <div class="reveal flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <div><span class="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[1.8px] text-forest-600"><span class="h-1.5 w-1.5 rounded-full bg-harvest-400"></span>Pasar tani digital</span><h2 class="mt-3 font-display text-3xl font-extrabold tracking-[-1.2px] text-forest-950 sm:text-4xl">Temukan kebutuhan <span class="text-forest-500">usahamu.</span></h2><p class="mt-3 max-w-2xl text-sm leading-6 text-slate-500 sm:text-base">Pilih hasil panen segar atau peralatan pertanian dari etalase AgriHub Pintar.</p></div>
+          <button id="open-sell-modal" class="btn-dark inline-flex min-h-11 items-center justify-center gap-2 self-start rounded-xl px-4 py-3 text-sm font-bold focus-ring md:self-auto"><i data-lucide="plus-circle" class="h-4 w-4"></i> Jual produk</button>
+        </div>
+
+        <div class="reveal mt-8 flex flex-col gap-4 rounded-2xl border border-forest-100 bg-white p-3 shadow-soft sm:p-4 lg:flex-row lg:items-center">
+          <div class="relative min-w-0 flex-1"><i data-lucide="search" class="absolute left-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-slate-400"></i><input id="product-search" class="field h-12 border-transparent bg-[#f7f9f6] pl-11 pr-4" type="search" placeholder="Cari beras, cabai, jagung, traktor..." autocomplete="off" aria-label="Cari produk marketplace" /></div>
+          <div class="flex flex-col gap-3 sm:flex-row lg:items-center"><label class="sr-only" for="sort-products">Urutkan produk</label><select id="sort-products" class="field h-12 min-w-[175px] bg-white text-sm"><option value="recommended">Urutan: rekomendasi</option><option value="price-low">Harga terendah</option><option value="price-high">Harga tertinggi</option><option value="newest">Produk terbaru</option></select><button id="reset-filters" class="inline-flex h-12 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold text-slate-500 hover:bg-forest-50 hover:text-forest-800"><i data-lucide="rotate-ccw" class="h-4 w-4"></i> Reset</button></div>
+        </div>
+
+        <div id="category-filters" class="no-scrollbar reveal mt-5 flex gap-2 overflow-x-auto pb-1" aria-label="Filter kategori">
+          <button class="category-button active shrink-0 rounded-full border border-forest-100 px-4 py-2.5 text-xs font-bold sm:text-sm" data-category="Semua">Semua produk <span id="total-products" class="ml-1 rounded-full bg-white/20 px-1.5 py-0.5 text-[10px]">0</span></button>
+          <button class="category-button shrink-0 rounded-full border border-forest-100 bg-white px-4 py-2.5 text-xs font-semibold text-slate-600 sm:text-sm" data-category="Hasil Panen">Hasil panen</button>
+          <button class="category-button shrink-0 rounded-full border border-forest-100 bg-white px-4 py-2.5 text-xs font-semibold text-slate-600 sm:text-sm" data-category="Pangan Pokok">Pangan pokok</button>
+          <button class="category-button shrink-0 rounded-full border border-forest-100 bg-white px-4 py-2.5 text-xs font-semibold text-slate-600 sm:text-sm" data-category="Sayuran">Sayuran</button>
+          <button class="category-button shrink-0 rounded-full border border-forest-100 bg-white px-4 py-2.5 text-xs font-semibold text-slate-600 sm:text-sm" data-category="Alsintan">Alat pertanian</button>
+        </div>
+
+        <div class="mt-7 flex items-center justify-between gap-4"><p id="results-label" class="text-sm text-slate-500" aria-live="polite">Produk pilihan untuk usaha tani</p><button id="show-favorites" class="inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-xs font-bold text-rose-600 hover:bg-rose-50"><i data-lucide="heart" class="h-3.5 w-3.5"></i><span id="favorites-filter-text">Lihat favorit</span></button></div>
+        <div id="product-grid" class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4" aria-live="polite"></div>
+        <div id="empty-products" class="hidden rounded-2xl border border-dashed border-forest-200 bg-white px-5 py-14 text-center"><span class="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-forest-50 text-forest-600"><i data-lucide="package-search" class="h-6 w-6"></i></span><h3 class="mt-4 font-display text-lg font-extrabold">Produk tidak ditemukan</h3><p class="mt-2 text-sm text-slate-500">Coba ubah kata kunci atau pilih kategori lain.</p><button id="empty-reset" class="btn-outline mt-4 rounded-xl px-4 py-2.5 text-sm font-bold">Tampilkan semua produk</button></div>
+        <div class="mt-8 flex flex-col items-center justify-center gap-2 text-center sm:flex-row sm:gap-3"><span class="grid h-8 w-8 place-items-center rounded-full bg-harvest-100 text-amber-800"><i data-lucide="info" class="h-4 w-4"></i></span><p class="max-w-xl text-xs leading-5 text-slate-500">Produk pada versi demo ini adalah contoh katalog. Konfirmasi stok, kualitas, lokasi, dan harga dengan penjual sebelum transaksi nyata.</p></div>
+      </div>
+    </section>
+
+    <!-- Feature section -->
+    <section id="keunggulan" class="scroll-mt-24 border-y border-forest-100 bg-white py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10">
+        <div class="reveal mx-auto max-w-2xl text-center"><span class="text-xs font-extrabold uppercase tracking-[1.8px] text-forest-600">Dibuat untuk kebutuhan nyata</span><h2 class="mt-3 font-display text-3xl font-extrabold tracking-[-1.2px] text-forest-950 sm:text-4xl">Bukan hanya jual beli.<br class="hidden sm:block" /> <span class="text-forest-500">Kelola usaha sampai tuntas.</span></h2><p class="mt-4 text-sm leading-7 text-slate-500 sm:text-base">Dari menentukan harga jual hingga merangkum pengeluaran, semua dirancang agar keputusan usaha tani lebih terukur.</p></div>
+        <div class="mt-11 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+          <article class="reveal rounded-3xl border border-forest-100 bg-[#f8faf7] p-6 sm:p-7"><span class="grid h-12 w-12 place-items-center rounded-2xl bg-forest-800 text-white"><i data-lucide="store" class="h-6 w-6"></i></span><h3 class="mt-5 font-display text-lg font-extrabold">Marketplace hasil panen</h3><p class="mt-2 text-sm leading-6 text-slate-500">Telusuri beras, jagung, cabai, bawang, dan komoditas lain. Cari berdasarkan nama, kategori, atau harga.</p><a href="#marketplace" class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-forest-700 hover:text-forest-500">Lihat katalog <i data-lucide="arrow-right" class="h-4 w-4"></i></a></article>
+          <article class="reveal reveal-delay-1 rounded-3xl border border-forest-100 bg-[#f8faf7] p-6 sm:p-7"><span class="grid h-12 w-12 place-items-center rounded-2xl bg-amber-400 text-forest-950"><i data-lucide="calculator" class="h-6 w-6"></i></span><h3 class="mt-5 font-display text-lg font-extrabold">Kalkulator keuntungan</h3><p class="mt-2 text-sm leading-6 text-slate-500">Masukkan hasil panen, harga jual, dan biaya produksi untuk menghitung laba, margin, serta ROI perkiraan.</p><a href="#kalkulator" class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-forest-700 hover:text-forest-500">Mulai menghitung <i data-lucide="arrow-right" class="h-4 w-4"></i></a></article>
+          <article class="reveal reveal-delay-2 rounded-3xl border border-forest-100 bg-[#f8faf7] p-6 sm:p-7"><span class="grid h-12 w-12 place-items-center rounded-2xl bg-sky-100 text-sky-800"><i data-lucide="book-open-check" class="h-6 w-6"></i></span><h3 class="mt-5 font-display text-lg font-extrabold">Buku usaha digital</h3><p class="mt-2 text-sm leading-6 text-slate-500">Simpan biaya dan pendapatan per musim, lihat ringkasan, hapus catatan, serta ekspor data ke CSV.</p><a href="#catatan" class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-forest-700 hover:text-forest-500">Buka catatan <i data-lucide="arrow-right" class="h-4 w-4"></i></a></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Profit calculator -->
+    <section id="kalkulator" class="scroll-mt-24 py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10">
+        <div class="reveal grid items-start gap-7 lg:grid-cols-[.8fr_1.2fr] lg:gap-12">
+          <div class="lg:sticky lg:top-28"><span class="inline-flex items-center gap-2 rounded-full bg-harvest-100 px-3 py-1.5 text-xs font-extrabold text-amber-900"><i data-lucide="chart-no-axes-combined" class="h-3.5 w-3.5"></i> Hitung sebelum menjual</span><h2 class="mt-4 font-display text-3xl font-extrabold leading-tight tracking-[-1.2px] text-forest-950 sm:text-4xl">Sudah tahu berapa <span class="text-forest-500">untungmu?</span></h2><p class="mt-4 text-sm leading-7 text-slate-500 sm:text-base">Isi perkiraan hasil panen, harga jual, dan pengeluaran. Hasil kalkulasi akan berubah otomatis saat angka diubah.</p>
+            <div class="mt-6 rounded-2xl border border-forest-100 bg-white p-4"><div class="flex gap-3"><span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-forest-50 text-forest-700"><i data-lucide="lightbulb" class="h-5 w-5"></i></span><p class="text-xs leading-5 text-slate-500"><strong class="text-forest-900">Tips:</strong> masukkan biaya yang sering terlupa seperti transportasi, sewa alat, tenaga kerja keluarga, dan penyusutan alat agar estimasi makin mendekati kondisi nyata.</p></div></div>
+          </div>
+          <div class="rounded-[28px] border border-forest-100 bg-white p-5 shadow-soft sm:p-7 lg:p-8">
+            <div class="flex items-center justify-between gap-4 border-b border-forest-100 pb-5"><div><h3 class="font-display text-xl font-extrabold">Kalkulator usaha tani</h3><p class="mt-1 text-xs text-slate-500">Estimasi untuk satu siklus produksi</p></div><span class="grid h-11 w-11 place-items-center rounded-2xl bg-forest-50 text-forest-700"><i data-lucide="calculator" class="h-5 w-5"></i></span></div>
+            <form id="profit-form" class="mt-5">
+              <div class="grid gap-4 sm:grid-cols-2">
+                <div><label class="mb-1.5 block text-xs font-bold text-slate-700" for="calc-crop">Komoditas</label><select id="calc-crop" class="field"><option value="Jagung">Jagung</option><option value="Padi / beras">Padi / beras</option><option value="Cabai merah">Cabai merah</option><option value="Bawang merah">Bawang merah</option><option value="Lainnya">Lainnya</option></select></div>
+                <div><label class="mb-1.5 block text-xs font-bold text-slate-700" for="calc-area">Luas lahan (ha)</label><input id="calc-area" class="field" type="number" min="0.01" step="0.01" value="1" required /></div>
+                <div><label class="mb-1.5 block text-xs font-bold text-slate-700" for="calc-yield">Perkiraan hasil (kg)</label><input id="calc-yield" class="field" type="number" min="0" step="0.1" value="5000" required /></div>
+                <div><label class="mb-1.5 block text-xs font-bold text-slate-700" for="calc-price">Harga jual per kg (Rp)</label><input id="calc-price" class="field" type="number" min="0" step="1" value="6200" required /></div>
+              </div>
+              <div class="mt-6"><div class="mb-3 flex items-center justify-between"><h4 class="text-sm font-extrabold text-forest-900">Rincian biaya produksi</h4><span class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Rupiah (Rp)</span></div>
+                <div class="grid gap-3 sm:grid-cols-2">
+                  <div><label class="mb-1.5 block text-xs font-semibold text-slate-600" for="cost-land">Pengolahan lahan</label><input id="cost-land" class="field" type="number" min="0" step="1000" value="800000" /></div>
+                  <div><label class="mb-1.5 block text-xs font-semibold text-slate-600" for="cost-seed">Benih / bibit</label><input id="cost-seed" class="field" type="number" min="0" step="1000" value="450000" /></div>
+                  <div><label class="mb-1.5 block text-xs font-semibold text-slate-600" for="cost-fertilizer">Pupuk</label><input id="cost-fertilizer" class="field" type="number" min="0" step="1000" value="1200000" /></div>
+                  <div><label class="mb-1.5 block text-xs font-semibold text-slate-600" for="cost-pest">Pengendalian hama</label><input id="cost-pest" class="field" type="number" min="0" step="1000" value="350000" /></div>
+                  <div><label class="mb-1.5 block text-xs font-semibold text-slate-600" for="cost-labor">Tenaga kerja</label><input id="cost-labor" class="field" type="number" min="0" step="1000" value="1500000" /></div>
+                  <div><label class="mb-1.5 block text-xs font-semibold text-slate-600" for="cost-other">Transportasi & lainnya</label><input id="cost-other" class="field" type="number" min="0" step="1000" value="400000" /></div>
+                </div>
+              </div>
+              <div class="mt-6 rounded-2xl bg-forest-950 p-5 text-white sm:p-6"><div class="flex items-center justify-between gap-4"><span class="text-sm font-medium text-white/70">Estimasi pendapatan</span><span id="calc-revenue" class="text-sm font-bold">Rp 31.000.000</span></div><div class="mt-3 flex items-center justify-between gap-4"><span class="text-sm font-medium text-white/70">Total biaya produksi</span><span id="calc-total-cost" class="text-sm font-bold">Rp 4.700.000</span></div><div class="my-4 border-t border-white/15"></div><span class="text-xs font-bold uppercase tracking-[1.5px] text-emerald-200">Estimasi laba bersih</span><div id="calc-profit" class="mt-1 font-display text-3xl font-extrabold tracking-[-1px] text-harvest-300 sm:text-4xl">Rp 26.300.000</div><div class="mt-4 grid grid-cols-2 gap-3"><div class="rounded-xl bg-white/[.08] p-3"><span class="block text-[10px] font-semibold text-white/60">Margin laba</span><span id="calc-margin" class="mt-1 block text-lg font-extrabold">84,8%</span></div><div class="rounded-xl bg-white/[.08] p-3"><span class="block text-[10px] font-semibold text-white/60">ROI (perkiraan)</span><span id="calc-roi" class="mt-1 block text-lg font-extrabold">559,6%</span></div></div><p id="calc-status" class="mt-4 text-xs leading-5 text-white/70" aria-live="polite">Angka di atas merupakan estimasi berdasarkan data yang dimasukkan.</p></div>
+              <div class="mt-4 flex flex-col gap-3 sm:flex-row"><button type="button" id="save-calculation" class="btn-primary inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold"><i data-lucide="save" class="h-4 w-4"></i> Simpan ke catatan usaha</button><button type="reset" id="reset-calculator" class="btn-outline inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold"><i data-lucide="rotate-ccw" class="h-4 w-4"></i> Reset angka</button></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Farm records -->
+    <section id="catatan" class="scroll-mt-24 border-y border-forest-100 bg-white py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10">
+        <div class="reveal flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><span class="text-xs font-extrabold uppercase tracking-[1.8px] text-forest-600">Buku usaha digital</span><h2 class="mt-3 font-display text-3xl font-extrabold tracking-[-1.2px] text-forest-950 sm:text-4xl">Catatan rapi, <span class="text-forest-500">keputusan lebih pasti.</span></h2><p class="mt-3 max-w-2xl text-sm leading-6 text-slate-500 sm:text-base">Simpan hasil dan pengeluaran setiap musim, lalu lihat gambaran keuangan usahatani dari satu layar.</p></div><div class="flex flex-wrap gap-2"><button id="export-records" class="btn-outline inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold"><i data-lucide="download" class="h-4 w-4"></i> Ekspor CSV</button><button id="open-record-modal" class="btn-dark inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold"><i data-lucide="plus" class="h-4 w-4"></i> Tambah catatan</button></div></div>
+        <div class="reveal mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3"><div class="rounded-2xl border border-forest-100 bg-[#f8faf7] p-5"><div class="flex items-center justify-between"><span class="text-xs font-semibold text-slate-500">Total pendapatan</span><span class="grid h-9 w-9 place-items-center rounded-xl bg-emerald-100 text-emerald-800"><i data-lucide="wallet" class="h-4 w-4"></i></span></div><div id="records-revenue" class="mt-3 font-display text-2xl font-extrabold tracking-tight text-forest-900">Rp 0</div><div class="mt-1 text-xs text-slate-500">Dari catatan tersimpan</div></div><div class="rounded-2xl border border-forest-100 bg-[#f8faf7] p-5"><div class="flex items-center justify-between"><span class="text-xs font-semibold text-slate-500">Total biaya</span><span class="grid h-9 w-9 place-items-center rounded-xl bg-amber-100 text-amber-800"><i data-lucide="receipt" class="h-4 w-4"></i></span></div><div id="records-cost" class="mt-3 font-display text-2xl font-extrabold tracking-tight text-forest-900">Rp 0</div><div class="mt-1 text-xs text-slate-500">Akumulasi biaya usaha</div></div><div class="rounded-2xl border border-forest-100 bg-[#f8faf7] p-5"><div class="flex items-center justify-between"><span class="text-xs font-semibold text-slate-500">Laba / rugi tercatat</span><span class="grid h-9 w-9 place-items-center rounded-xl bg-sky-100 text-sky-800"><i data-lucide="chart-no-axes-combined" class="h-4 w-4"></i></span></div><div id="records-profit" class="mt-3 font-display text-2xl font-extrabold tracking-tight text-forest-900">Rp 0</div><div id="records-count" class="mt-1 text-xs text-slate-500">0 catatan tersimpan</div></div></div>
+        <div class="reveal mt-6 overflow-hidden rounded-2xl border border-forest-100 bg-white shadow-soft"><div class="flex flex-col gap-3 border-b border-forest-100 px-5 py-4 sm:flex-row sm:items-center sm:justify-between"><div><h3 class="font-display text-base font-extrabold">Riwayat usaha tani</h3><p class="mt-1 text-xs text-slate-500">Catatan yang ditambahkan akan tersimpan di browser ini.</p></div><label class="relative block sm:w-64"><i data-lucide="search" class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"></i><input id="record-search" class="field h-10 pl-9 text-xs" type="search" placeholder="Cari komoditas atau catatan..." aria-label="Cari catatan usaha tani" /></label></div><div id="records-table-wrap" class="overflow-x-auto"><table class="w-full min-w-[720px] text-left"><thead class="bg-[#f7f9f6]"><tr class="text-[10px] font-extrabold uppercase tracking-[1px] text-slate-500"><th class="px-5 py-3">Komoditas / catatan</th><th class="px-4 py-3">Tanggal</th><th class="px-4 py-3 text-right">Pendapatan</th><th class="px-4 py-3 text-right">Biaya</th><th class="px-4 py-3 text-right">Laba / rugi</th><th class="px-5 py-3 text-right">Aksi</th></tr></thead><tbody id="records-body" class="divide-y divide-forest-50"></tbody></table></div><div id="empty-records" class="hidden px-6 py-12 text-center"><span class="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-forest-50 text-forest-600"><i data-lucide="notebook-pen" class="h-6 w-6"></i></span><h3 class="mt-3 font-display text-base font-extrabold">Belum ada catatan yang cocok</h3><p class="mt-1 text-sm text-slate-500">Tambah catatan baru atau coba kata kunci lain.</p><button id="empty-add-record" class="btn-primary mt-4 rounded-xl px-4 py-2.5 text-sm font-bold">Tambah catatan</button></div></div>
+        <div class="mt-4 flex items-start gap-2 text-[11px] leading-5 text-slate-400"><i data-lucide="lock-keyhole" class="mt-0.5 h-3.5 w-3.5 shrink-0"></i><p>Privasi demo: catatan dan preferensi disimpan di localStorage pada perangkat/browser ini, bukan dikirim ke server. Bersihkan data browser dapat menghapus catatan.</p></div>
+      </div>
+    </section>
+
+    <!-- Callout -->
+    <section class="py-14 sm:py-20"><div class="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10"><div class="reveal relative isolate overflow-hidden rounded-[28px] bg-forest-900 px-6 py-9 text-white sm:px-10 sm:py-12 lg:px-14"><div class="site-grid absolute inset-0 -z-10 opacity-40"></div><div class="absolute -right-10 -top-24 -z-10 h-72 w-72 rounded-full bg-emerald-400/10 blur-3xl"></div><div class="flex flex-col justify-between gap-7 md:flex-row md:items-center"><div class="max-w-2xl"><span class="text-xs font-extrabold uppercase tracking-[1.7px] text-harvest-300">Mulai dari langkah sederhana</span><h2 class="mt-3 font-display text-2xl font-extrabold tracking-[-.7px] sm:text-3xl">Usaha tani yang baik dimulai dari catatan yang baik.</h2><p class="mt-3 text-sm leading-6 text-white/70">Coba kalkulator dan buku usaha digital untuk mengenali biaya, pendapatan, serta peluang perbaikan di musim berikutnya.</p></div><a href="#kalkulator" class="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-harvest-300 px-5 py-3 text-sm font-extrabold text-forest-950 hover:bg-harvest-400 focus-ring">Coba gratis <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a></div></div></div></section>
+
+    <!-- Footer -->
+    <footer class="border-t border-forest-100 bg-white">
+      <div class="mx-auto max-w-[1440px] px-4 pb-7 pt-12 sm:px-6 lg:px-10"><div class="grid gap-9 sm:grid-cols-2 lg:grid-cols-[1.5fr_.7fr_.8fr]"><div><a href="#top" class="inline-flex items-center gap-2.5"><span class="grid h-10 w-10 place-items-center rounded-[14px] bg-forest-800 text-harvest-300"><i data-lucide="sprout" class="h-5 w-5"></i></span><span class="font-display text-lg font-extrabold tracking-[-.6px]">AgriHub<span class="text-forest-500"> Pintar</span></span></a><p class="mt-4 max-w-sm text-sm leading-6 text-slate-500">Mendekatkan petani dengan pasar dan membantu usaha tani tumbuh dengan informasi yang lebih terukur.</p><div class="mt-4 inline-flex items-center gap-2 rounded-lg bg-forest-50 px-3 py-2 text-xs font-semibold text-forest-700"><i data-lucide="leaf" class="h-4 w-4"></i> Dari lahan, untuk masa depan.</div></div><div><h3 class="text-sm font-extrabold text-forest-900">Jelajahi</h3><div class="mt-4 flex flex-col gap-3 text-sm text-slate-500"><a href="#marketplace" class="hover:text-forest-700">Marketplace</a><a href="#kalkulator" class="hover:text-forest-700">Kalkulator keuntungan</a><a href="#catatan" class="hover:text-forest-700">Catatan usaha</a></div></div><div><h3 class="text-sm font-extrabold text-forest-900">Catatan penting</h3><p class="mt-4 text-sm leading-6 text-slate-500">Versi demonstrasi frontend. Untuk transaksi nyata, verifikasi identitas penjual, kualitas produk, dan ketentuan pembayaran terlebih dahulu.</p></div></div><div class="mt-10 flex flex-col justify-between gap-3 border-t border-forest-100 pt-5 text-xs text-slate-400 sm:flex-row sm:items-center"><p>© <span id="current-year"></span> AgriHub Pintar. Dibuat untuk mendukung petani Indonesia.</p><div class="flex items-center gap-4"><a href="#top" class="hover:text-forest-700">Kembali ke atas ↑</a><span>Demo website · v1.1</span></div></div></div>
+    </footer>
+  </main>
+
+  <!-- Cart drawer -->
+  <div id="cart-overlay" class="drawer-overlay fixed inset-0 z-50 bg-forest-950/40 backdrop-blur-[2px]"></div>
+  <aside id="cart-drawer" class="drawer fixed right-0 top-0 z-[51] flex h-dvh w-full max-w-[440px] flex-col bg-white shadow-2xl" aria-label="Keranjang belanja" aria-hidden="true">
+    <div class="flex items-center justify-between border-b border-forest-100 px-5 py-5"><div><h2 class="font-display text-xl font-extrabold">Keranjang belanja</h2><p id="cart-subtitle" class="mt-1 text-xs text-slate-500">0 produk dipilih</p></div><button id="close-cart" class="grid h-10 w-10 place-items-center rounded-xl text-slate-500 hover:bg-forest-50 hover:text-forest-900 focus-ring" aria-label="Tutup keranjang"><i data-lucide="x" class="h-5 w-5"></i></button></div>
+    <div id="cart-items" class="flex-1 space-y-3 overflow-y-auto p-5"></div>
+    <div class="border-t border-forest-100 p-5"><div class="mb-4 flex items-center justify-between"><span class="text-sm font-semibold text-slate-500">Subtotal estimasi</span><strong id="cart-subtotal" class="font-display text-xl font-extrabold text-forest-900">Rp 0</strong></div><p class="mb-4 text-[11px] leading-5 text-slate-400">Belum termasuk ongkos kirim. Ini simulasi keranjang, bukan pembayaran langsung.</p><button id="checkout-button" class="btn-primary flex min-h-12 w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-extrabold disabled:cursor-not-allowed disabled:opacity-40"><i data-lucide="clipboard-check" class="h-4 w-4"></i> Buat ringkasan pesanan</button><button id="continue-shopping" class="mt-2 flex min-h-11 w-full items-center justify-center rounded-xl px-4 py-2.5 text-sm font-bold text-slate-500 hover:bg-forest-50">Lanjut belanja</button></div>
+  </aside>
+
+  <!-- Generic modal -->
+  <div id="modal-backdrop" class="modal-backdrop fixed inset-0 z-[60] flex items-center justify-center overflow-y-auto bg-forest-950/50 p-3 backdrop-blur-sm sm:p-6" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-title">
+    <div class="modal-panel my-auto max-h-[92dvh] w-full max-w-[560px] overflow-y-auto rounded-[24px] bg-white shadow-2xl">
+      <div class="sticky top-0 z-10 flex items-center justify-between border-b border-forest-100 bg-white/95 px-5 py-4 backdrop-blur sm:px-6"><div><p id="modal-eyebrow" class="text-[10px] font-extrabold uppercase tracking-[1.5px] text-forest-600">AgriHub Pintar</p><h2 id="modal-title" class="mt-1 font-display text-xl font-extrabold text-forest-950">Formulir</h2></div><button id="modal-close" class="grid h-9 w-9 place-items-center rounded-xl text-slate-500 hover:bg-forest-50 hover:text-forest-900 focus-ring" aria-label="Tutup dialog"><i data-lucide="x" class="h-5 w-5"></i></button></div>
+      <div id="modal-content" class="p-5 sm:p-6"></div>
+    </div>
+  </div>
+
+  <!-- Combined login / registration experience -->
+  <section id="auth-screen" class="auth-screen" hidden role="dialog" aria-modal="true" aria-label="Masuk atau daftar AgriHub Pintar">
+    <div id="auth-card" class="auth-card">
+      <button id="auth-close" class="auth-close focus-ring" type="button" aria-label="Tutup login dan pendaftaran"><i data-lucide="x" class="h-5 w-5"></i></button>
+      <div class="auth-pane auth-login-pane">
+        <a href="#top" class="mb-8 inline-flex items-center gap-2.5" aria-label="AgriHub Pintar"><span class="grid h-10 w-10 place-items-center rounded-[13px] bg-forest-800 text-harvest-300"><i data-lucide="sprout" class="h-5 w-5"></i></span><span class="font-display text-base font-extrabold text-forest-900">AgriHub <span class="text-forest-500">Pintar</span></span></a>
+        <p class="text-[10px] font-extrabold uppercase tracking-[1.7px] text-forest-600">Selamat datang kembali</p>
+        <h2 class="mt-2 font-display text-[31px] font-extrabold leading-tight tracking-[-1px] text-forest-950">Masuk ke akun</h2>
+        <p class="mt-2 text-sm leading-6 text-slate-500">Kelola usaha tani dan temukan peluang baru bersama komunitas pertanian.</p>
+        <div id="auth-feedback-login" class="auth-feedback mt-4" role="alert"></div>
+        <form id="login-form" class="mt-5 space-y-4" novalidate>
+          <div><label class="mb-1.5 block text-xs font-bold text-slate-700" for="login-email">Email</label><input id="login-email" class="field" name="email" type="email" autocomplete="username" placeholder="nama@email.com" required /></div>
+          <div><label class="mb-1.5 block text-xs font-bold text-slate-700" for="login-password">Kata sandi</label><input id="login-password" class="field" name="password" type="password" autocomplete="current-password" minlength="8" placeholder="Masukkan kata sandi" required /></div>
+          <button class="btn-primary flex min-h-12 w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-extrabold" type="submit">Masuk ke dashboard <i data-lucide="arrow-right" class="h-4 w-4"></i></button>
+        </form>
+        <div class="mt-5 border-t border-forest-100 pt-4"><div class="flex items-center justify-between gap-3"><p class="text-[10px] font-extrabold uppercase tracking-[1.25px] text-slate-400">Coba akun demo</p><span class="text-[10px] text-slate-400">Pilih lalu tekan Masuk</span></div><div class="mt-2 grid grid-cols-3 gap-2"><button class="demo-login-btn" type="button" data-demo-fill="superadmin"><i data-lucide="shield-check" class="h-4 w-4"></i>Admin</button><button class="demo-login-btn" type="button" data-demo-fill="seller"><i data-lucide="store" class="h-4 w-4"></i>Penjual</button><button class="demo-login-btn" type="button" data-demo-fill="buyer"><i data-lucide="shopping-basket" class="h-4 w-4"></i>Pembeli</button></div><p class="mt-2 text-[10px] leading-4 text-slate-400">Admin: admin@agrihub.test · Penjual: penjual@agrihub.test · Pembeli: pembeli@agrihub.test. Kata sandi demo tertera di README.</p></div>
+      </div>
+      <div class="auth-pane auth-register-pane">
+        <a href="#top" class="mb-6 inline-flex items-center gap-2.5" aria-label="AgriHub Pintar"><span class="grid h-10 w-10 place-items-center rounded-[13px] bg-forest-800 text-harvest-300"><i data-lucide="sprout" class="h-5 w-5"></i></span><span class="font-display text-base font-extrabold text-forest-900">AgriHub <span class="text-forest-500">Pintar</span></span></a>
+        <p class="text-[10px] font-extrabold uppercase tracking-[1.7px] text-forest-600">Mulai tumbuh bersama</p>
+        <h2 class="mt-2 font-display text-[29px] font-extrabold leading-tight tracking-[-1px] text-forest-950">Buat akun baru</h2>
+        <p class="mt-2 text-sm leading-6 text-slate-500">Daftar gratis sebagai penjual atau pembeli. Akses admin tidak tersedia melalui pendaftaran publik.</p>
+        <div id="auth-feedback-register" class="auth-feedback mt-3" role="alert"></div>
+        <form id="register-form" class="mt-4 space-y-3" novalidate>
+          <div><label class="mb-1 block text-xs font-bold text-slate-700" for="register-name">Nama lengkap / usaha</label><input id="register-name" class="field" name="name" autocomplete="name" maxlength="80" placeholder="Nama kamu atau nama usaha" required /></div>
+          <div><label class="mb-1 block text-xs font-bold text-slate-700" for="register-email">Email aktif</label><input id="register-email" class="field" name="email" type="email" autocomplete="email" maxlength="120" placeholder="nama@email.com" required /></div>
+          <div><label class="mb-1 block text-xs font-bold text-slate-700" for="register-role">Saya ingin bergabung sebagai</label><select id="register-role" class="field" name="role" required><option value="buyer">Pembeli hasil panen</option><option value="seller">Penjual / petani</option></select></div>
+          <div class="grid grid-cols-2 gap-3"><div><label class="mb-1 block text-xs font-bold text-slate-700" for="register-password">Kata sandi</label><input id="register-password" class="field" name="password" type="password" autocomplete="new-password" minlength="8" placeholder="Min. 8 karakter" required /></div><div><label class="mb-1 block text-xs font-bold text-slate-700" for="register-confirm">Ulangi sandi</label><input id="register-confirm" class="field" name="confirm" type="password" autocomplete="new-password" minlength="8" placeholder="Ulangi sandi" required /></div></div>
+          <label class="flex items-start gap-2.5 pt-1 text-[11px] leading-5 text-slate-500"><input class="mt-1 accent-forest-700" type="checkbox" id="register-consent" required /><span>Saya memahami bahwa ini adalah prototipe dan data akun disimpan di browser ini.</span></label>
+          <button class="btn-primary flex min-h-12 w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-extrabold" type="submit">Buat akun <i data-lucide="user-plus" class="h-4 w-4"></i></button>
+        </form>
+      </div>
+      <div class="auth-showcase">
+        <div id="auth-promo-login" class="auth-promo"><span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/20 bg-white/10 text-harvest-300"><i data-lucide="sprout" class="h-6 w-6"></i></span><p class="mt-7 text-[10px] font-extrabold uppercase tracking-[2px] text-emerald-200">Ekosistem pertanian digital</p><h2 class="mt-3 font-display text-[34px] font-extrabold leading-[1.13] tracking-[-1px]">Bersama, panen peluang lebih besar.</h2><p class="mt-4 text-sm leading-7 text-white/75">Satu akun untuk mengelola produk, pesanan, dan catatan usaha tani dengan lebih teratur.</p><div class="mt-7 flex items-center gap-3"><span class="grid h-9 w-9 place-items-center rounded-xl bg-white/10"><i data-lucide="shopping-basket" class="h-4 w-4 text-harvest-300"></i></span><span class="text-xs leading-5 text-white/80">Marketplace hasil panen & alsintan</span></div><button id="switch-to-register" class="auth-switch mt-8" type="button">Belum punya akun? Daftar <i data-lucide="arrow-right" class="h-4 w-4"></i></button></div>
+        <div id="auth-promo-register" class="auth-promo" hidden><span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/20 bg-white/10 text-harvest-300"><i data-lucide="sprout" class="h-6 w-6"></i></span><p class="mt-7 text-[10px] font-extrabold uppercase tracking-[2px] text-emerald-200">Langkah pertama dimulai di sini</p><h2 class="mt-3 font-display text-[34px] font-extrabold leading-[1.13] tracking-[-1px]">Akun baru, peluang baru.</h2><p class="mt-4 text-sm leading-7 text-white/75">Temukan pembeli, jelajahi produk pertanian, dan bangun keputusan usaha dari catatan yang lebih rapi.</p><div class="mt-7 flex items-center gap-3"><span class="grid h-9 w-9 place-items-center rounded-xl bg-white/10"><i data-lucide="shield-check" class="h-4 w-4 text-harvest-300"></i></span><span class="text-xs leading-5 text-white/80">Pilih peran yang sesuai kebutuhanmu</span></div><button id="switch-to-login" class="auth-switch mt-8" type="button"><i data-lucide="arrow-left" class="h-4 w-4"></i> Sudah punya akun? Masuk</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Role-specific dashboards -->
+  <section id="dashboard-screen" class="dashboard-screen" hidden aria-label="Dashboard pengguna">
+    <div class="dashboard-layout">
+      <aside class="dashboard-sidebar">
+        <a href="#top" class="dashboard-brand" aria-label="AgriHub Pintar"><span class="grid h-10 w-10 place-items-center rounded-[13px] bg-forest-800 text-harvest-300"><i data-lucide="sprout" class="h-5 w-5"></i></span><span><span class="block font-display text-base font-extrabold text-forest-900">AgriHub <span class="text-forest-500">Pintar</span></span><span class="text-[9px] font-bold uppercase tracking-[1.45px] text-slate-400">Portal pengguna</span></span></a>
+        <div id="dashboard-profile" class="dashboard-profile"><span id="dashboard-avatar" class="dashboard-avatar">A</span><span class="min-w-0"><strong id="dashboard-user-name" class="block truncate text-xs font-extrabold text-forest-900">Pengguna</strong><span id="dashboard-role-label" class="mt-1 block text-[10px] font-semibold text-slate-500">Pembeli</span></span></div>
+        <nav id="dashboard-nav" class="dashboard-nav" aria-label="Navigasi dashboard"></nav>
+        <div class="dashboard-sidebar-note mt-auto rounded-2xl bg-forest-50 p-3.5"><span class="flex items-center gap-2 text-xs font-extrabold text-forest-800"><i data-lucide="shield-check" class="h-4 w-4"></i> Mode prototipe</span><p class="mt-2 text-[10px] leading-5 text-slate-500">Data disimpan lokal pada browser ini. Jangan gunakan data pribadi atau transaksi nyata.</p></div>
+        <button id="dashboard-logout" class="dashboard-action mt-1 w-full justify-start px-3 py-3 text-xs text-rose-700 hover:bg-rose-50" type="button"><i data-lucide="log-out" class="h-4 w-4"></i> Keluar dari akun</button>
+      </aside>
+      <div class="dashboard-workspace">
+        <header class="dashboard-topbar"><div><p id="dashboard-greeting" class="text-[10px] font-extrabold uppercase tracking-[1.7px] text-forest-600">AREA PENGGUNA</p><h1 id="dashboard-title" class="mt-1 font-display text-2xl font-extrabold tracking-tight text-forest-950">Ringkasan</h1><p id="dashboard-subtitle" class="mt-1 text-xs text-slate-500">Informasi aktivitas akun kamu.</p></div><button id="dashboard-close" class="dashboard-action focus-ring" type="button"><i data-lucide="arrow-left" class="h-4 w-4"></i><span>Kembali ke website</span></button></header>
+        <div id="dashboard-content" class="dashboard-content"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toast -->
+  <div id="toast" class="toast fixed bottom-4 left-1/2 z-[80] flex w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 items-center gap-3 rounded-2xl border border-forest-100 bg-white px-4 py-3.5 shadow-lift" role="status" aria-live="polite"><span id="toast-icon" class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-700"><i data-lucide="check" class="h-4 w-4"></i></span><span id="toast-message" class="text-sm font-semibold text-forest-900">Berhasil</span></div>
+
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script>
+  (() => {
+    'use strict';
+
+    const $ = (selector, root = document) => root.querySelector(selector);
+    const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+    const rupiah = (value) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(Number.isFinite(Number(value)) ? Number(value) : 0).replace(/\u00a0/g, ' ');
+    const numberID = (value, decimals = 0) => new Intl.NumberFormat('id-ID', { maximumFractionDigits: decimals, minimumFractionDigits: decimals }).format(value);
+    const escapeHTML = (value = '') => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
+    const safeJSON = (key, fallback) => { try { const parsed = JSON.parse(localStorage.getItem(key)); return parsed ?? fallback; } catch { return fallback; } };
+    const persist = (key, value) => { try { localStorage.setItem(key, JSON.stringify(value)); return true; } catch { showToast('Penyimpanan browser penuh atau tidak tersedia.', 'error'); return false; } };
+    const removeStored = (key) => { try { localStorage.removeItem(key); return true; } catch { return false; } };
+    const nowISO = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; };
+    const dateID = (iso) => { if (!iso) return '—'; const d = new Date(`${iso}T00:00:00`); return Number.isNaN(d.getTime()) ? '—' : new Intl.DateTimeFormat('id-ID', { day:'2-digit', month:'short', year:'numeric' }).format(d); };
+    const makeId = () => `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
+
+    const productSeed = [
+      { id:'p-beras', name:'Beras Putih Premium', category:'Pangan Pokok', subcategory:'Hasil Panen', price:14500, unit:'kg', stock:850, location:'Deli Serdang, Sumatera Utara', seller:'Tani Makmur', rating:4.9, badge:'Pilihan petani', image:'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=900&q=80', description:'Beras putih pilihan dengan butiran utuh, cocok untuk kebutuhan rumah tangga maupun usaha kuliner.' },
+      { id:'p-cabai', name:'Cabai Merah Keriting', category:'Sayuran', subcategory:'Hasil Panen', price:32000, unit:'kg', stock:180, location:'Karo, Sumatera Utara', seller:'Kelompok Tani Sejahtera', rating:4.8, badge:'Panen segar', image:'https://images.unsplash.com/photo-1588252303782-cb80119abd6d?auto=format&fit=crop&w=900&q=80', description:'Cabai merah keriting hasil panen petani dengan warna cerah. Harga dapat berubah mengikuti pasaran.' },
+      { id:'p-jagung', name:'Jagung Pipil Kering', category:'Pangan Pokok', subcategory:'Hasil Panen', price:6200, unit:'kg', stock:2400, location:'Tigabinanga, Kabupaten Karo', seller:'Bersama Tani Karo', rating:4.9, badge:'Stok banyak', image:'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=900&q=80', description:'Jagung pipil kering untuk kebutuhan pakan dan pengolahan. Tersedia untuk pembelian dalam jumlah besar.' },
+      { id:'p-bawang', name:'Bawang Merah Pilihan', category:'Sayuran', subcategory:'Hasil Panen', price:28000, unit:'kg', stock:320, location:'Samosir, Sumatera Utara', seller:'Panen Nusantara', rating:4.7, badge:'Kualitas pilihan', image:'https://images.unsplash.com/photo-1508747703725-719777637510?auto=format&fit=crop&w=900&q=80', description:'Bawang merah pilihan dengan ukuran relatif seragam, dikemas sesuai jumlah pemesanan.' },
+      { id:'p-kentang', name:'Kentang Konsumsi', category:'Sayuran', subcategory:'Hasil Panen', price:12000, unit:'kg', stock:600, location:'Berastagi, Kabupaten Karo', seller:'Mitra Dataran Tinggi', rating:4.8, badge:'Dataran tinggi', image:'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=900&q=80', description:'Kentang konsumsi hasil panen dataran tinggi, sesuai untuk rumah tangga, restoran, dan pedagang.' },
+      { id:'p-traktor', name:'Traktor Tangan Mini 8 HP', category:'Alsintan', subcategory:'Alat Pertanian', price:18500000, unit:'unit', stock:4, location:'Medan, Sumatera Utara', seller:'Maju Mesin Tani', rating:4.8, badge:'Alsintan modern', image:'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=900&q=80', description:'Traktor tangan untuk membantu pengolahan lahan. Periksa spesifikasi, garansi, dan layanan purna jual kepada penjual.' },
+      { id:'p-sprayer', name:'Sprayer Elektrik 16 Liter', category:'Alsintan', subcategory:'Alat Pertanian', price:450000, unit:'unit', stock:22, location:'Medan, Sumatera Utara', seller:'Toko Tani Digital', rating:4.7, badge:'Praktis digunakan', image:'https://images.unsplash.com/photo-1599685315640-3ec5d7d4dd36?auto=format&fit=crop&w=900&q=80', description:'Alat semprot elektrik untuk membantu pekerjaan pemeliharaan tanaman. Spesifikasi baterai perlu dikonfirmasi.' },
+      { id:'p-kompos', name:'Pupuk Kompos Organik 25 kg', category:'Input Pertanian', subcategory:'Sarana Produksi', price:38000, unit:'karung', stock:75, location:'Deli Serdang, Sumatera Utara', seller:'Hijau Lestari Organik', rating:4.8, badge:'Organik', image:'https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=900&q=80', description:'Pupuk kompos organik untuk memperbaiki bahan organik tanah. Sesuaikan dosis dengan kebutuhan lahan.' }
+    ];
+
+    let products = safeJSON('agrihub-products-v1', null);
+    if (!Array.isArray(products) || products.length === 0) products = structuredClone(productSeed);
+    let favorites = safeJSON('agrihub-favorites-v1', []);
+    let cart = safeJSON('agrihub-cart-v1', []);
+    let records = safeJSON('agrihub-records-v1', []);
+    let orders = safeJSON('agrihub-orders-v1', []);
+    if (!Array.isArray(favorites)) favorites = [];
+    if (!Array.isArray(cart)) cart = [];
+    if (!Array.isArray(records)) records = [];
+    if (!Array.isArray(orders)) orders = [];
+    let currentCategory = 'Semua';
+    let onlyFavorites = false;
+    let modalReturnFocus = null;
+    let toastTimer = null;
+    let authUsers = safeJSON('agrihub-users-v1', []);
+    if (!Array.isArray(authUsers)) authUsers = [];
+    let currentUser = null;
+    let dashboardTab = 'overview';
+    let authMode = 'login';
+
+    function saveProducts() { persist('agrihub-products-v1', products); }
+    function saveFavorites() { persist('agrihub-favorites-v1', favorites); }
+    function saveCart() { persist('agrihub-cart-v1', cart); }
+    function saveRecords() { persist('agrihub-records-v1', records); }
+    function saveOrders() { persist('agrihub-orders-v1', orders); }
+    function saveUsers() { persist('agrihub-users-v1', authUsers); }
+
+    const demoAccounts = [
+      { id:'demo-superadmin', name:'Super Admin', email:'admin@agrihub.test', role:'superadmin', password:'AdminAgri#2026' },
+      { id:'demo-seller', name:'Penjual Demo', email:'penjual@agrihub.test', role:'seller', password:'Tani123!' },
+      { id:'demo-buyer', name:'Pembeli Demo', email:'pembeli@agrihub.test', role:'buyer', password:'Tani123!' }
+    ];
+    async function passwordDigest(password) {
+      const value = `agrihub-pintar-demo-v1:${String(password)}`;
+      if (window.crypto && window.crypto.subtle && window.TextEncoder) {
+        const digest = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(value));
+        return 'sha256:' + Array.from(new Uint8Array(digest)).map(n => n.toString(16).padStart(2,'0')).join('');
+      }
+      // Compatibility fallback for local-file demos; this is not suitable for production authentication.
+      let hash = 2166136261;
+      for (let i=0;i<value.length;i++) { hash ^= value.charCodeAt(i); hash = Math.imul(hash,16777619); }
+      return 'fallback:' + (hash >>> 0).toString(16);
+    }
+    function sessionSafeUser(user) { return user ? { id:user.id, name:user.name, email:user.email, role:user.role, status:user.status || 'active', isDemo:!!user.isDemo } : null; }
+    async function ensureDemoAccounts() {
+      let changed = false;
+      for (const demo of demoAccounts) {
+        let idx = authUsers.findIndex(user => String(user.email).toLowerCase() === demo.email);
+        if (idx < 0) {
+          const passwordHash = await passwordDigest(demo.password);
+          // Recheck after await to avoid duplicate demo accounts during simultaneous initialization / login.
+          idx = authUsers.findIndex(user => String(user.email).toLowerCase() === demo.email);
+          if (idx < 0) {
+            authUsers.push({ id:demo.id, name:demo.name, email:demo.email, role:demo.role, passwordHash, createdAt:nowISO(), status:'active', isDemo:true });
+            changed = true;
+          }
+        }
+      }
+      if (changed) saveUsers();
+    }
+    function setAuthFeedback(formKind, message = '') {
+      const target = $(`#auth-feedback-${formKind}`);
+      if (!target) return;
+      target.textContent = message;
+      target.classList.toggle('show', Boolean(message));
+    }
+    function setAuthMode(mode) {
+      authMode = mode === 'register' ? 'register' : 'login';
+      $('#auth-card').classList.toggle('register-mode', authMode === 'register');
+      $('#auth-promo-login').hidden = authMode !== 'login';
+      $('#auth-promo-register').hidden = authMode !== 'register';
+      setAuthFeedback('login'); setAuthFeedback('register');
+      if (authMode === 'register') $('#register-name').focus(); else $('#login-email').focus();
+      iconRefresh();
+    }
+    function showAuth(mode = 'login') {
+      $('#dashboard-screen').hidden = true;
+      $('#auth-screen').hidden = false;
+      document.body.classList.add('modal-open');
+      setAuthMode(mode);
+      iconRefresh();
+    }
+    function closeAuth() {
+      $('#auth-screen').hidden = true;
+      if ($('#dashboard-screen').hidden) document.body.classList.remove('modal-open');
+      $('#account-button').focus();
+    }
+    function updateAccountButton() {
+      const label = $('#account-button-label');
+      const button = $('#account-button');
+      if (!label || !button) return;
+      label.textContent = currentUser ? 'Dashboard' : 'Masuk / Daftar';
+      button.setAttribute('aria-label', currentUser ? `Buka dashboard ${currentUser.name}` : 'Masuk atau daftar akun');
+      button.innerHTML = `<i data-lucide="${currentUser ? (currentUser.role === 'superadmin' ? 'shield-check' : 'layout-dashboard') : 'user-round'}" class="h-4 w-4"></i><span id="account-button-label" class="hidden sm:inline">${currentUser ? 'Dashboard' : 'Masuk / Daftar'}</span>`;
+      iconRefresh();
+    }
+    async function startSession(user) {
+      if (!user || user.status === 'suspended') { setAuthFeedback('login','Akun ini sedang dinonaktifkan. Hubungi pengelola untuk bantuan.'); return; }
+      currentUser = sessionSafeUser(user);
+      persist('agrihub-session-v1', currentUser);
+      closeAuth(); updateAccountButton();
+      showDashboard('overview');
+      showToast(`Selamat datang, ${currentUser.name}!`);
+    }
+    async function initializeAuth() {
+      await ensureDemoAccounts();
+      const session = safeJSON('agrihub-session-v1', null);
+      if (session && session.id) {
+        const found = authUsers.find(user => user.id === session.id && user.status !== 'suspended');
+        currentUser = sessionSafeUser(found || null);
+      }
+      if (!currentUser) removeStored('agrihub-session-v1');
+      updateAccountButton();
+    }
+    function roleName(role) { return role === 'superadmin' ? 'Super Admin' : role === 'seller' ? 'Penjual' : 'Pembeli'; }
+    function dashboardOwnedProducts() {
+      if (!currentUser) return [];
+      return products.filter(product => product.ownerEmail === currentUser.email || (product.seller || '').toLocaleLowerCase('id-ID') === currentUser.name.toLocaleLowerCase('id-ID'));
+    }
+    function dashboardOrdersForSeller() {
+      const ids = new Set(dashboardOwnedProducts().map(product => product.id));
+      return orders.filter(order => Array.isArray(order.items) && order.items.some(item => ids.has(item.id)));
+    }
+    function dashboardRecordsForUser() {
+      if (!currentUser) return [];
+      return records.filter(record => record.ownerEmail === currentUser.email);
+    }
+    function dashStat(title, value, sub, icon, color = 'green') {
+      const styles = color === 'amber' ? 'bg-amber-50 text-amber-700' : color === 'blue' ? 'bg-sky-50 text-sky-700' : color === 'rose' ? 'bg-rose-50 text-rose-700' : 'bg-forest-50 text-forest-700';
+      return `<article class="dashboard-stat"><div class="flex items-start justify-between gap-3"><div class="min-w-0"><p class="text-xs font-semibold text-slate-500">${escapeHTML(title)}</p><p class="mt-2 break-words font-display text-[25px] font-extrabold tracking-tight text-forest-950">${value}</p><p class="mt-1 text-[10px] leading-4 text-slate-400">${escapeHTML(sub)}</p></div><span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl ${styles}"><i data-lucide="${icon}" class="h-5 w-5"></i></span></div></article>`;
+    }
+    function dashSectionHeading(title, desc, action = '') {
+      return `<div class="mb-4 flex flex-col justify-between gap-3 sm:flex-row sm:items-end"><div><h2 class="font-display text-base font-extrabold text-forest-950">${title}</h2><p class="mt-1 text-xs leading-5 text-slate-500">${desc}</p></div>${action}</div>`;
+    }
+    function ordersTable(list) {
+      if (!list.length) return `<div class="rounded-2xl border border-dashed border-forest-200 bg-white px-5 py-10 text-center"><span class="mx-auto grid h-11 w-11 place-items-center rounded-xl bg-forest-50 text-forest-700"><i data-lucide="package-search" class="h-5 w-5"></i></span><p class="mt-3 text-sm font-extrabold text-forest-900">Belum ada pesanan</p><p class="mt-1 text-xs text-slate-500">Pesanan simulasi yang dibuat di website akan tampil di bagian ini.</p></div>`;
+      return `<div class="dashboard-table-wrap"><table class="dashboard-table"><thead><tr><th>ID pesanan</th><th>Tanggal</th><th>Pembeli</th><th>Produk</th><th>Subtotal</th></tr></thead><tbody>${list.slice().reverse().map(order => `<tr><td class="font-extrabold text-forest-800">${escapeHTML(order.id)}</td><td>${dateID(order.date)}</td><td>${escapeHTML(order.buyer || 'Pembeli')}</td><td>${escapeHTML((order.items || []).map(item=>item.name).join(', ') || '—')}</td><td class="font-extrabold">${rupiah(Number(order.subtotal)||0)}</td></tr>`).join('')}</tbody></table></div>`;
+    }
+    function productsTable(list, canModerate = false, isSeller = false) {
+      if (!list.length) return `<div class="rounded-2xl border border-dashed border-forest-200 bg-white px-5 py-10 text-center"><span class="mx-auto grid h-11 w-11 place-items-center rounded-xl bg-forest-50 text-forest-700"><i data-lucide="package-plus" class="h-5 w-5"></i></span><p class="mt-3 text-sm font-extrabold text-forest-900">Belum ada listing</p><p class="mt-1 text-xs text-slate-500">Tambahkan produk pertama untuk mulai membangun katalog.</p>${isSeller ? '<button class="btn-primary mt-4 rounded-xl px-4 py-2.5 text-xs font-extrabold" data-dashboard-action="add-product" type="button">Pasang produk</button>' : ''}</div>`;
+      return `<div class="dashboard-table-wrap"><table class="dashboard-table"><thead><tr><th>Produk</th><th>Penjual</th><th>Harga</th><th>Stok</th><th>Status</th>${canModerate || isSeller ? '<th>Aksi</th>' : ''}</tr></thead><tbody>${list.map(product => `<tr><td><div class="font-extrabold text-forest-900">${escapeHTML(product.name)}</div><div class="mt-1 text-[10px] text-slate-400">${escapeHTML(product.category || product.subcategory || 'Produk')}</div></td><td>${escapeHTML(product.seller || 'Penjual')}</td><td class="font-bold">${rupiah(product.price)} / ${escapeHTML(product.unit || 'unit')}</td><td>${numberID(Number(product.stock)||0)}</td><td><span class="rounded-full px-2.5 py-1 text-[10px] font-extrabold ${product.status === 'inactive' ? 'bg-rose-50 text-rose-700' : 'bg-emerald-50 text-emerald-700'}">${product.status === 'inactive' ? 'Nonaktif' : 'Aktif'}</span></td>${canModerate || isSeller ? `<td><div class="flex gap-2">${canModerate ? `<button type="button" class="dashboard-action" data-dashboard-action="toggle-product" data-id="${escapeHTML(product.id)}">${product.status === 'inactive' ? 'Aktifkan' : 'Nonaktifkan'}</button>` : ''}<button type="button" class="dashboard-action danger" data-dashboard-action="delete-product" data-id="${escapeHTML(product.id)}">Hapus</button></div></td>` : ''}</tr>`).join('')}</tbody></table></div>`;
+    }
+    function usersTable(list) {
+      if (!list.length) return '<p class="rounded-xl bg-white p-6 text-sm text-slate-500">Belum ada akun pengguna.</p>';
+      return `<div class="dashboard-table-wrap"><table class="dashboard-table"><thead><tr><th>Pengguna</th><th>Peran</th><th>Bergabung</th><th>Status</th><th>Aksi</th></tr></thead><tbody>${list.map(user => `<tr><td><div class="font-extrabold text-forest-900">${escapeHTML(user.name)}</div><div class="mt-1 text-[10px] text-slate-400">${escapeHTML(user.email)}</div></td><td>${roleName(user.role)}${user.isDemo ? ' · Demo' : ''}</td><td>${dateID(user.createdAt)}</td><td><span class="rounded-full px-2.5 py-1 text-[10px] font-extrabold ${user.status === 'suspended' ? 'bg-rose-50 text-rose-700' : 'bg-emerald-50 text-emerald-700'}">${user.status === 'suspended' ? 'Dinonaktifkan' : 'Aktif'}</span></td><td>${user.isDemo || user.id === currentUser?.id ? '<span class="text-[10px] text-slate-400">Dilindungi</span>' : `<button class="dashboard-action ${user.status === 'suspended' ? '' : 'danger'}" type="button" data-dashboard-action="toggle-user" data-id="${escapeHTML(user.id)}">${user.status === 'suspended' ? 'Aktifkan akun' : 'Nonaktifkan'}</button>`}</td></tr>`).join('')}</tbody></table></div>`;
+    }
+    function recordsTable(list) {
+      if (!list.length) return `<div class="rounded-2xl border border-dashed border-forest-200 bg-white px-5 py-10 text-center"><p class="text-sm font-extrabold text-forest-900">Belum ada catatan usaha yang terhubung</p><p class="mt-1 text-xs text-slate-500">Tambahkan catatan dari halaman Catatan Usaha agar data tercatat pada akun ini.</p><button type="button" class="dashboard-action mt-4" data-dashboard-action="add-record"><i data-lucide="plus" class="h-4 w-4"></i> Tambah catatan</button></div>`;
+      return `<div class="dashboard-table-wrap"><table class="dashboard-table"><thead><tr><th>Komoditas</th><th>Tanggal</th><th>Pendapatan</th><th>Biaya</th><th>Laba / rugi</th></tr></thead><tbody>${list.map(record=>{const profit=(Number(record.revenue)||0)-(Number(record.cost)||0);return `<tr><td class="font-extrabold">${escapeHTML(record.crop)}</td><td>${dateID(record.date)}</td><td>${rupiah(record.revenue)}</td><td>${rupiah(record.cost)}</td><td class="font-extrabold ${profit<0?'text-rose-600':'text-emerald-700'}">${rupiah(profit)}</td>`}).join('')}</tbody></table></div>`;
+    }
+    const dashboardNavByRole = {
+      superadmin:[['overview','layout-dashboard','Ringkasan'],['users','users','Kelola pengguna'],['products','package','Kelola produk'],['orders','clipboard-list','Semua pesanan']],
+      seller:[['overview','layout-dashboard','Ringkasan usaha'],['products','package','Produk saya'],['orders','clipboard-list','Pesanan terkait'],['records','book-open-text','Catatan usaha']],
+      buyer:[['overview','layout-dashboard','Ringkasan'],['orders','package-check','Pesanan saya'],['favorites','heart','Produk favorit'],['marketplace','store','Jelajahi produk']]
+    };
+    function showDashboard(tab = 'overview') {
+      if (!currentUser) { showAuth('login'); return; }
+      dashboardTab = tab;
+      $('#auth-screen').hidden = true;
+      $('#dashboard-screen').hidden = false;
+      document.body.classList.add('modal-open');
+      renderDashboard();
+    }
+    function closeDashboard() {
+      $('#dashboard-screen').hidden = true;
+      if ($('#auth-screen').hidden && !$('#modal-backdrop').classList.contains('open') && !$('#cart-drawer').classList.contains('open')) document.body.classList.remove('modal-open');
+      updateAccountButton();
+    }
+    function renderDashboard() {
+      if (!currentUser) return;
+      const role = currentUser.role;
+      const nav = dashboardNavByRole[role] || dashboardNavByRole.buyer;
+      $('#dashboard-user-name').textContent = currentUser.name;
+      $('#dashboard-avatar').textContent = (currentUser.name || 'A').trim().charAt(0).toUpperCase();
+      $('#dashboard-role-label').textContent = roleName(role);
+      $('#dashboard-greeting').textContent = role === 'superadmin' ? 'PUSAT KENDALI PLATFORM' : role === 'seller' ? 'RUANG KERJA PENJUAL' : 'RUANG BELANJA PEMBELI';
+      $('#dashboard-nav').innerHTML = nav.map(([id,icon,label])=>`<button type="button" class="${dashboardTab===id?'active':''}" data-dashboard-tab="${id}" ${dashboardTab===id?'aria-current="page"':''}><i data-lucide="${icon}" class="h-4 w-4"></i>${label}</button>`).join('');
+      const currentNav = nav.find(item=>item[0]===dashboardTab) || nav[0];
+      $('#dashboard-title').textContent = currentNav[2];
+      $('#dashboard-subtitle').textContent = role === 'superadmin' ? 'Pantau pengguna, katalog, dan aktivitas marketplace demo.' : role === 'seller' ? 'Pantau listing produk dan aktivitas usaha dari satu tempat.' : 'Pantau pesanan, simpan produk, dan jelajahi kebutuhan pertanian.';
+      const content = $('#dashboard-content');
+      if (role === 'superadmin') content.innerHTML = renderAdminTab();
+      else if (role === 'seller') content.innerHTML = renderSellerTab();
+      else content.innerHTML = renderBuyerTab();
+      iconRefresh();
+    }
+    function renderAdminTab() {
+      const activeUsers = authUsers.filter(user=>user.status!=='suspended').length;
+      const orderValue = orders.reduce((sum,order)=>sum+(Number(order.subtotal)||0),0);
+      if (dashboardTab === 'users') return `${dashSectionHeading('Pengelolaan akun','Akun demo dilindungi. Akun pengguna biasa dapat dinonaktifkan atau diaktifkan kembali.')}<div class="mb-4 grid gap-3 sm:grid-cols-3">${dashStat('Total akun',numberID(authUsers.length),'Termasuk akun demo','users')}${dashStat('Akun aktif',numberID(activeUsers),'Dapat masuk ke prototipe','user-check')}${dashStat('Akun nonaktif',numberID(authUsers.length-activeUsers),'Status dibatasi','user-round-x', 'rose')}</div>${usersTable(authUsers.slice().sort((a,b)=>(a.role==='superadmin'?-1:0)-(b.role==='superadmin'?-1:0)))}`;
+      if (dashboardTab === 'products') return `${dashSectionHeading('Moderasi listing','Nonaktifkan listing yang tidak semestinya atau hapus produk dari katalog demo.')}<div class="mb-4 grid gap-3 sm:grid-cols-3">${dashStat('Total listing',numberID(products.length),'Seluruh katalog','package')}${dashStat('Listing aktif',numberID(products.filter(p=>p.status!=='inactive').length),'Terlihat oleh pengguna','package-check')}${dashStat('Stok seluruh produk',numberID(products.reduce((sum,p)=>sum+(Number(p.stock)||0),0)),'Satuan mengikuti tiap produk','boxes','blue')}</div>${productsTable(products,true,false)}`;
+      if (dashboardTab === 'orders') return `${dashSectionHeading('Semua pesanan simulasi','Data pesanan yang dibuat melalui formulir checkout pada browser ini.')}<div class="mb-4 grid gap-3 sm:grid-cols-3">${dashStat('Jumlah pesanan',numberID(orders.length),'Pesanan tersimpan lokal','clipboard-list')}${dashStat('Nilai subtotal',rupiah(orderValue),'Bukan omzet terverifikasi','banknote','amber')}${dashStat('Listing tersedia',numberID(products.filter(p=>p.status!=='inactive').length),'Produk aktif','package','blue')}</div>${ordersTable(orders)}`;
+      return `<div class="mb-6 flex flex-col justify-between gap-4 rounded-[22px] bg-forest-950 p-6 text-white sm:flex-row sm:items-center sm:p-8"><div><p class="text-[10px] font-extrabold uppercase tracking-[1.8px] text-emerald-200">Halo, ${escapeHTML(currentUser.name)}</p><h2 class="mt-2 font-display text-2xl font-extrabold">Pusat kendali AgriHub Pintar</h2><p class="mt-2 max-w-xl text-xs leading-6 text-white/70">Lihat gambaran pengguna, produk, dan aktivitas transaksi simulasi tanpa berpindah halaman.</p></div><span class="grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-white/15 bg-white/10 text-harvest-300"><i data-lucide="shield-check" class="h-7 w-7"></i></span></div><div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">${dashStat('Total pengguna',numberID(authUsers.length),'Akun terdaftar','users')}${dashStat('Listing produk',numberID(products.length),'Produk pada katalog','package','blue')}${dashStat('Pesanan demo',numberID(orders.length),'Checkout tersimpan','clipboard-list','amber')}${dashStat('Nilai pesanan',rupiah(orderValue),'Subtotal simulasi','wallet','green')}</div><div class="mt-7 grid gap-5 xl:grid-cols-2"><section>${dashSectionHeading('Listing terbaru','Pantau sebagian produk yang saat ini tersedia.','<button type="button" class="dashboard-action" data-dashboard-tab="products">Kelola produk <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i></button>')}${productsTable(products.slice(-5).reverse(),true,false)}</section><section>${dashSectionHeading('Pengguna terbaru','Akun lokal yang tersedia di prototipe.','<button type="button" class="dashboard-action" data-dashboard-tab="users">Kelola pengguna <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i></button>')}${usersTable(authUsers.slice(-5).reverse())}</section></div><p class="mt-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-[11px] leading-5 text-amber-900"><strong>Catatan:</strong> semua statistik dihitung dari data contoh dan localStorage browser. Dashboard ini bukan panel admin server produksi.</p>`;
+    }
+    function renderSellerTab() {
+      const mine = dashboardOwnedProducts();
+      const myOrders = dashboardOrdersForSeller();
+      const mineIds = new Set(mine.map(product=>product.id));
+      const salesValue = myOrders.reduce((sum,order)=>sum+(order.items||[]).filter(item=>mineIds.has(item.id)).reduce((subtotal,item)=>subtotal+(Number(item.price)||0)*(Number(item.qty)||0),0),0);
+      const myRecords = dashboardRecordsForUser();
+      if (dashboardTab === 'products') return `${dashSectionHeading('Produk saya','Listing yang dipasang oleh akun ini.','<button class="btn-primary rounded-xl px-4 py-2.5 text-xs font-extrabold" type="button" data-dashboard-action="add-product"><i data-lucide="plus" class="mr-1 inline h-4 w-4"></i>Pasang produk</button>')}<div class="mb-4 grid gap-3 sm:grid-cols-3">${dashStat('Listing saya',numberID(mine.length),'Produk milik akun ini','package')}${dashStat('Stok tersedia',numberID(mine.reduce((sum,p)=>sum+(Number(p.stock)||0),0)),'Jumlah dari listing saya','boxes','blue')}${dashStat('Pesanan terkait',numberID(myOrders.length),'Checkout berisi produk saya','clipboard-list','amber')}</div>${productsTable(mine,false,true)}`;
+      if (dashboardTab === 'orders') return `${dashSectionHeading('Pesanan terkait produk','Pesanan simulasi yang itemnya cocok dengan listing milik akun ini.')}<div class="mb-4 grid gap-3 sm:grid-cols-3">${dashStat('Pesanan',numberID(myOrders.length),'Ada produk milik saya','clipboard-list')}${dashStat('Nilai penjualan',rupiah(salesValue),'Subtotal item milik saya','wallet','amber')}${dashStat('Listing aktif',numberID(mine.filter(p=>p.status!=='inactive').length),'Produk aktif','package-check','blue')}</div>${ordersTable(myOrders)}`;
+      if (dashboardTab === 'records') return `${dashSectionHeading('Catatan usaha tani','Lihat catatan yang dibuat saat akun ini masuk.','<button class="dashboard-action" type="button" data-dashboard-action="add-record"><i data-lucide="plus" class="h-4 w-4"></i>Tambah catatan</button>')}<div class="mb-4 grid gap-3 sm:grid-cols-3">${dashStat('Jumlah catatan',numberID(myRecords.length),'Tersimpan untuk akun ini','book-open-text')}${dashStat('Total pendapatan',rupiah(myRecords.reduce((sum,r)=>sum+(Number(r.revenue)||0),0)),'Dari catatan lokal','trending-up','blue')}${dashStat('Total laba/rugi',rupiah(myRecords.reduce((sum,r)=>sum+(Number(r.revenue)||0)-(Number(r.cost)||0),0)),'Perhitungan catatan','calculator','amber')}</div>${recordsTable(myRecords)}`;
+      return `<div class="mb-6 flex flex-col justify-between gap-4 rounded-[22px] bg-forest-950 p-6 text-white sm:flex-row sm:items-center sm:p-8"><div><p class="text-[10px] font-extrabold uppercase tracking-[1.8px] text-emerald-200">Ruang kerja penjual</p><h2 class="mt-2 font-display text-2xl font-extrabold">Usaha tumbuh dari data yang rapi.</h2><p class="mt-2 max-w-xl text-xs leading-6 text-white/70">Tambah listing, cek pesanan terkait, dan catat biaya serta pendapatan usaha tani.</p></div><button type="button" class="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-harvest-300 px-4 py-3 text-xs font-extrabold text-forest-950" data-dashboard-action="add-product"><i data-lucide="package-plus" class="h-4 w-4"></i>Pasang produk</button></div><div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">${dashStat('Listing saya',numberID(mine.length),'Produk terhubung dengan akun','package')}${dashStat('Stok listing',numberID(mine.reduce((sum,p)=>sum+(Number(p.stock)||0),0)),'Jumlah dari listing saya','boxes','blue')}${dashStat('Pesanan terkait',numberID(myOrders.length),'Pesanan demo berisi produk saya','clipboard-list','amber')}${dashStat('Estimasi penjualan',rupiah(salesValue),'Subtotal item di pesanan simulasi','wallet')}</div><div class="mt-7">${dashSectionHeading('Listing terbaru saya','Produk yang sudah dipasang pada marketplace.','<button type="button" class="dashboard-action" data-dashboard-tab="products">Lihat semua <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i></button>')}${productsTable(mine.slice(-5).reverse(),false,true)}</div><div class="mt-7 rounded-2xl border border-forest-100 bg-white p-5"><h3 class="font-display text-sm font-extrabold text-forest-900">Kelola usaha lebih lengkap</h3><p class="mt-1 text-xs leading-5 text-slate-500">Catat biaya tanam, pendapatan panen, dan lihat estimasi laba atau rugi pada buku usaha.</p><button type="button" class="dashboard-action mt-3" data-dashboard-tab="records"><i data-lucide="book-open-text" class="h-4 w-4"></i>Buka catatan usaha</button></div>`;
+    }
+    function renderBuyerTab() {
+      const myOrders = orders.filter(order=>order.buyerEmail===currentUser.email);
+      const mySpend = myOrders.reduce((sum,order)=>sum+(Number(order.subtotal)||0),0);
+      if (dashboardTab === 'orders') return `${dashSectionHeading('Riwayat pesanan saya','Pesanan yang disimpan saat akun pembeli ini digunakan.')}<div class="mb-4 grid gap-3 sm:grid-cols-3">${dashStat('Jumlah pesanan',numberID(myOrders.length),'Checkout tersimpan','package-check')}${dashStat('Nilai subtotal',rupiah(mySpend),'Akumulasi pesanan demo','wallet','amber')}${dashStat('Keranjang saat ini',numberID(cart.reduce((sum,item)=>sum+(Number(item.qty)||0),0)),'Produk di browser ini','shopping-basket','blue')}</div>${ordersTable(myOrders)}`;
+      if (dashboardTab === 'favorites') {
+        const favProducts = products.filter(product=>favorites.includes(product.id));
+        return `${dashSectionHeading('Produk favorit','Produk yang kamu tandai dengan ikon hati pada marketplace.','<button class="dashboard-action" type="button" data-dashboard-action="browse-marketplace"><i data-lucide="store" class="h-4 w-4"></i>Jelajahi marketplace</button>')}${productsTable(favProducts,false,false)}`;
+      }
+      if (dashboardTab === 'marketplace') return `<div class="rounded-[22px] bg-forest-950 p-7 text-white sm:p-10"><span class="grid h-12 w-12 place-items-center rounded-2xl bg-white/10 text-harvest-300"><i data-lucide="store" class="h-6 w-6"></i></span><h2 class="mt-5 font-display text-2xl font-extrabold">Cari produk untuk kebutuhanmu.</h2><p class="mt-2 max-w-xl text-sm leading-6 text-white/70">Buka katalog untuk mencari hasil panen, alat pertanian, dan sarana produksi. Keranjang akan tetap tersimpan pada browser ini.</p><button type="button" class="mt-5 inline-flex items-center gap-2 rounded-xl bg-harvest-300 px-4 py-3 text-xs font-extrabold text-forest-950" data-dashboard-action="browse-marketplace">Buka marketplace <i data-lucide="arrow-up-right" class="h-4 w-4"></i></button></div><div class="mt-6">${dashSectionHeading('Pilihan produk','Sebagian contoh produk yang tersedia.')}${productsTable(products.filter(p=>p.status!=='inactive').slice(0,6),false,false)}</div>`;
+      return `<div class="mb-6 flex flex-col justify-between gap-4 rounded-[22px] bg-forest-950 p-6 text-white sm:flex-row sm:items-center sm:p-8"><div><p class="text-[10px] font-extrabold uppercase tracking-[1.8px] text-emerald-200">Ruang belanja pembeli</p><h2 class="mt-2 font-display text-2xl font-extrabold">Halo, ${escapeHTML(currentUser.name)}.</h2><p class="mt-2 max-w-xl text-xs leading-6 text-white/70">Temukan komoditas pertanian, simpan produk favorit, dan lacak ringkasan pesananmu.</p></div><button type="button" class="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-harvest-300 px-4 py-3 text-xs font-extrabold text-forest-950" data-dashboard-action="browse-marketplace"><i data-lucide="store" class="h-4 w-4"></i>Belanja produk</button></div><div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">${dashStat('Pesanan saya',numberID(myOrders.length),'Pesanan dengan akun ini','package-check')}${dashStat('Total belanja',rupiah(mySpend),'Subtotal dari pesanan demo','wallet','amber')}${dashStat('Produk favorit',numberID(favorites.length),'Tersimpan di browser','heart','rose')}${dashStat('Di keranjang',numberID(cart.reduce((sum,item)=>sum+(Number(item.qty)||0),0)),'Item yang sedang dipilih','shopping-basket','blue')}</div><div class="mt-7">${dashSectionHeading('Produk untuk dijelajahi','Lihat katalog lengkap dan filter komoditas.','<button type="button" class="dashboard-action" data-dashboard-action="browse-marketplace">Semua produk <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i></button>')}${productsTable(products.filter(p=>p.status!=='inactive').slice(0,4),false,false)}</div><div class="mt-6">${dashSectionHeading('Pesanan terbaru','Riwayat transaksi simulasi dari akun kamu.')}${ordersTable(myOrders)}</div>`;
+    }
+    function handleDashboardAction(action, id) {
+      const role = currentUser?.role;
+      if (action === 'add-product') {
+        if (role !== 'seller' && role !== 'superadmin') { showToast('Fitur pasang produk hanya tersedia untuk akun penjual.', 'error'); return; }
+        closeDashboard(); setTimeout(()=>openSellModal(),80); return;
+      }
+      if (action === 'add-record') { closeDashboard(); setTimeout(()=>openRecordModal(),80); return; }
+      if (action === 'browse-marketplace') { closeDashboard(); setTimeout(()=>$('#marketplace').scrollIntoView({behavior:'smooth'}),30); return; }
+      if (action === 'open-cart') { closeDashboard(); renderCart(); openCart(); return; }
+      if (action === 'delete-product') {
+        const product = products.find(item=>item.id===id); if (!product) return;
+        if (role !== 'superadmin' && !(role==='seller' && (product.ownerEmail===currentUser.email || product.seller===currentUser.name))) { showToast('Kamu tidak memiliki izin untuk menghapus listing ini.', 'error'); return; }
+        if (!window.confirm(`Hapus listing "${product.name}" dari katalog lokal?`)) return;
+        products=products.filter(item=>item.id!==id); cart=cart.filter(item=>item.id!==id); favorites=favorites.filter(item=>item!==id); saveProducts();saveCart();saveFavorites();renderProducts();renderCart();renderDashboard();showToast('Listing berhasil dihapus dari katalog lokal.','info');return;
+      }
+      if (action === 'toggle-product') {
+        if (role !== 'superadmin') return;
+        const product=products.find(item=>item.id===id);if(!product)return;
+        product.status=product.status==='inactive'?'active':'inactive';saveProducts();renderProducts();renderDashboard();showToast(`Listing ${product.status==='inactive'?'dinonaktifkan':'diaktifkan'}.`,'info');return;
+      }
+      if (action === 'toggle-user') {
+        if (role !== 'superadmin') return;
+        const user=authUsers.find(item=>item.id===id);if(!user||user.isDemo||user.id===currentUser.id)return;
+        user.status=user.status==='suspended'?'active':'suspended';saveUsers();renderDashboard();showToast(`Akun ${user.status==='suspended'?'dinonaktifkan':'diaktifkan'}.`,'info');return;
+      }
+    }
+    function bindAuthAndDashboard() {
+      $('#account-button').addEventListener('click',()=>currentUser?showDashboard('overview'):showAuth('login'));
+      $('#auth-close').addEventListener('click',closeAuth);
+      $('#auth-screen').addEventListener('click',event=>{if(event.target===$('#auth-screen'))closeAuth();});
+      $('#switch-to-register').addEventListener('click',()=>setAuthMode('register'));
+      $('#switch-to-login').addEventListener('click',()=>setAuthMode('login'));
+      $('#auth-screen').addEventListener('click',async event=>{
+        const button=event.target.closest('[data-demo-fill]');if(!button)return;
+        const demo=demoAccounts.find(item=>item.role===button.dataset.demoFill);if(!demo)return;
+        await ensureDemoAccounts();setAuthMode('login');$('#login-email').value=demo.email;$('#login-password').value=demo.password;setAuthFeedback('login',`Akun demo ${roleName(demo.role)} terisi. Tekan tombol Masuk ke dashboard.`);
+      });
+      $('#login-form').addEventListener('submit',async event=>{
+        event.preventDefault();setAuthFeedback('login');
+        const email=String($('#login-email').value||'').trim().toLowerCase();const password=String($('#login-password').value||'');
+        if(!email||!$('#login-email').validity.valid||!password){setAuthFeedback('login','Masukkan email yang valid dan kata sandi.');return;}
+        await ensureDemoAccounts();const user=authUsers.find(item=>String(item.email).toLowerCase()===email);
+        if(!user||user.passwordHash!==await passwordDigest(password)){setAuthFeedback('login','Email atau kata sandi tidak cocok. Periksa kembali atau gunakan akun demo.');return;}
+        if(user.status==='suspended'){setAuthFeedback('login','Akun ini dinonaktifkan oleh pengelola.');return;}
+        await startSession(user);
+      });
+      $('#register-form').addEventListener('submit',async event=>{
+        event.preventDefault();setAuthFeedback('register');
+        const name=String($('#register-name').value||'').trim();const email=String($('#register-email').value||'').trim().toLowerCase();const role=$('#register-role').value;const password=String($('#register-password').value||'');const confirm=String($('#register-confirm').value||'');
+        if(name.length<2){setAuthFeedback('register','Nama harus berisi minimal 2 karakter.');return;}
+        if(!$('#register-email').validity.valid||!email){setAuthFeedback('register','Masukkan alamat email yang valid.');return;}
+        if(!['seller','buyer'].includes(role)){setAuthFeedback('register','Pilih peran penjual atau pembeli.');return;}
+        if(password.length<8){setAuthFeedback('register','Kata sandi harus memiliki minimal 8 karakter.');return;}
+        if(password!==confirm){setAuthFeedback('register','Konfirmasi kata sandi belum sama.');return;}
+        if(!$('#register-consent').checked){setAuthFeedback('register','Centang persetujuan prototipe untuk melanjutkan.');return;}
+        await ensureDemoAccounts();if(authUsers.some(item=>String(item.email).toLowerCase()===email)){setAuthFeedback('register','Email sudah terdaftar. Silakan masuk dengan akun tersebut.');return;}
+        const user={id:`user-${makeId()}`,name,email,role,passwordHash:await passwordDigest(password),createdAt:nowISO(),status:'active',isDemo:false};authUsers.push(user);saveUsers();$('#register-form').reset();await startSession(user);
+      });
+      $('#dashboard-nav').addEventListener('click',event=>{const button=event.target.closest('[data-dashboard-tab]');if(button){dashboardTab=button.dataset.dashboardTab;renderDashboard();}});
+      $('#dashboard-content').addEventListener('click',event=>{
+        const tabButton=event.target.closest('[data-dashboard-tab]');if(tabButton){dashboardTab=tabButton.dataset.dashboardTab;renderDashboard();return;}
+        const actionButton=event.target.closest('[data-dashboard-action]');if(actionButton)handleDashboardAction(actionButton.dataset.dashboardAction,actionButton.dataset.id);
+      });
+      $('#dashboard-close').addEventListener('click',closeDashboard);
+      $('#dashboard-logout').addEventListener('click',()=>{currentUser=null;removeStored('agrihub-session-v1');closeDashboard();updateAccountButton();showToast('Kamu telah keluar dari akun.','info');});
+      document.addEventListener('keydown',event=>{if(event.key==='Escape'){if(!$('#auth-screen').hidden)closeAuth();else if(!$('#dashboard-screen').hidden)closeDashboard();}});
+    }
+
+    function iconRefresh() { if (window.lucide && typeof window.lucide.createIcons === 'function') window.lucide.createIcons(); }
+
+    function showToast(message, kind = 'success') {
+      const toast = $('#toast'); const iconWrap = $('#toast-icon');
+      $('#toast-message').textContent = message;
+      iconWrap.className = `grid h-9 w-9 shrink-0 place-items-center rounded-xl ${kind === 'error' ? 'bg-rose-50 text-rose-700' : kind === 'info' ? 'bg-sky-50 text-sky-700' : 'bg-emerald-50 text-emerald-700'}`;
+      iconWrap.innerHTML = `<i data-lucide="${kind === 'error' ? 'alert-circle' : kind === 'info' ? 'info' : 'check'}" class="h-4 w-4"></i>`;
+      iconRefresh(); toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
+    }
+
+    function updateBadges() {
+      const count = cart.reduce((sum, item) => sum + Math.max(0, Number(item.qty) || 0), 0);
+      $('#cart-count').textContent = count > 99 ? '99+' : count;
+      $('#cart-subtitle').textContent = `${count} produk dipilih`;
+      $('#favorite-count').textContent = favorites.length;
+      $('#favorite-count').classList.toggle('hidden', favorites.length === 0);
+      $('#total-products').textContent = products.length;
+      $('#favorites-filter-text').textContent = onlyFavorites ? 'Tampilkan semua' : 'Lihat favorit';
+    }
+
+    function categoryMatch(product, category) {
+      if (category === 'Semua') return true;
+      if (category === 'Hasil Panen') return product.subcategory === 'Hasil Panen';
+      return product.category === category || (category === 'Alsintan' && product.category === 'Alsintan');
+    }
+
+    function renderProducts() {
+      const keyword = $('#product-search').value.trim().toLocaleLowerCase('id-ID');
+      const sort = $('#sort-products').value;
+      let visible = products.filter(p => p.status !== 'inactive' && p.status !== 'pending' && categoryMatch(p, currentCategory));
+      if (onlyFavorites) visible = visible.filter(p => favorites.includes(p.id));
+      if (keyword) visible = visible.filter(p => [p.name,p.category,p.subcategory,p.location,p.seller,p.description].some(value => String(value || '').toLocaleLowerCase('id-ID').includes(keyword)));
+      if (sort === 'price-low') visible.sort((a,b) => Number(a.price)-Number(b.price));
+      if (sort === 'price-high') visible.sort((a,b) => Number(b.price)-Number(a.price));
+      if (sort === 'newest') visible.sort((a,b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
+
+      $('#results-label').textContent = `${visible.length} produk ditemukan${onlyFavorites ? ' · favorit' : ''}`;
+      $('#product-grid').classList.toggle('hidden', visible.length === 0);
+      $('#empty-products').classList.toggle('hidden', visible.length !== 0);
+      $('#product-grid').innerHTML = visible.map((p, idx) => {
+        const fav = favorites.includes(p.id);
+        const badge = p.badge ? `<span class="absolute left-3 top-3 max-w-[75%] truncate rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-extrabold text-forest-800 shadow-sm backdrop-blur">${escapeHTML(p.badge)}</span>` : '';
+        const productCategory = p.subcategory || p.category;
+        return `<article class="product-card overflow-hidden rounded-[22px] border border-forest-100 bg-white" style="animation-delay:${Math.min(idx,5)*45}ms">
+          <div class="relative overflow-hidden bg-[#edf2eb]"><img class="product-image h-[195px] w-full object-cover" src="${escapeHTML(p.image || '')}" alt="${escapeHTML(p.name)}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=70'" />${badge}<button class="favorite-toggle absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full border border-white/70 ${fav ? 'bg-rose-50 text-rose-600' : 'bg-white/90 text-slate-500'} shadow-sm backdrop-blur transition hover:scale-105 hover:text-rose-600 focus-ring" data-id="${escapeHTML(p.id)}" aria-label="${fav ? 'Hapus dari favorit' : 'Tambah ke favorit'}: ${escapeHTML(p.name)}" aria-pressed="${fav}"><i data-lucide="heart" class="h-[17px] w-[17px] ${fav ? 'fill-current' : ''}"></i></button></div>
+          <div class="p-4"><div class="flex items-center justify-between gap-2"><span class="text-[10px] font-extrabold uppercase tracking-[1.2px] text-forest-600">${escapeHTML(productCategory)}</span><span class="inline-flex items-center gap-1 text-[11px] font-bold text-slate-500"><i data-lucide="star" class="h-3 w-3 fill-amber-400 text-amber-400"></i>${Number(p.rating || 0).toFixed(1)}</span></div>
+            <h3 class="mt-2 min-h-[44px] font-display text-[15px] font-extrabold leading-5 text-forest-950">${escapeHTML(p.name)}</h3><p class="mt-1 line-clamp-2 min-h-[34px] text-[11px] leading-[17px] text-slate-500">${escapeHTML(p.description || '')}</p>
+            <div class="mt-3 flex items-end justify-between gap-2"><div class="min-w-0"><div class="font-display text-lg font-extrabold tracking-tight text-forest-900">${rupiah(p.price)}<span class="ml-1 text-[10px] font-semibold text-slate-400">/${escapeHTML(p.unit || 'unit')}</span></div><div class="mt-1 flex items-center gap-1 text-[10px] text-slate-400"><i data-lucide="map-pin" class="h-3 w-3 shrink-0"></i><span class="truncate">${escapeHTML(p.location || 'Indonesia')}</span></div></div><span class="shrink-0 rounded-lg bg-forest-50 px-2 py-1.5 text-[10px] font-bold text-forest-700">Stok ${numberID(Number(p.stock) || 0)}</span></div>
+            <div class="mt-4 flex items-center gap-2 border-t border-forest-50 pt-3"><div class="flex min-w-0 flex-1 items-center gap-2"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-forest-100 text-[10px] font-extrabold text-forest-800">${escapeHTML((p.seller || 'A').trim().charAt(0).toUpperCase())}</span><span class="truncate text-[11px] font-semibold text-slate-600">${escapeHTML(p.seller || 'Penjual')}</span></div><button class="add-cart btn-primary inline-flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-xl px-3 text-xs font-extrabold disabled:cursor-not-allowed disabled:opacity-40" data-id="${escapeHTML(p.id)}" ${Number(p.stock) <= 0 ? 'disabled' : ''} aria-label="Tambahkan ${escapeHTML(p.name)} ke keranjang"><i data-lucide="plus" class="h-3.5 w-3.5"></i> Keranjang</button></div>
+          </div></article>`;
+      }).join('');
+      updateBadges(); iconRefresh();
+    }
+
+    function setCategory(category) {
+      currentCategory = category;
+      $$('.category-button').forEach(button => {
+        const active = button.dataset.category === category;
+        button.classList.toggle('active', active);
+        button.classList.toggle('bg-white', !active);
+        button.classList.toggle('text-slate-600', !active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+      renderProducts();
+    }
+
+    function toggleFavorite(id) {
+      if (favorites.includes(id)) { favorites = favorites.filter(item => item !== id); showToast('Produk dihapus dari favorit.', 'info'); }
+      else { favorites.push(id); showToast('Produk disimpan ke favorit.'); }
+      saveFavorites(); renderProducts();
+    }
+
+    function addToCart(id) {
+      const p = products.find(item => item.id === id); if (!p) return;
+      const existing = cart.find(item => item.id === id);
+      const available = Math.max(0, Number(p.stock) || 0);
+      if (available < 1) { showToast('Stok produk sedang kosong.', 'error'); return; }
+      if (existing) {
+        if (existing.qty >= available) { showToast('Jumlah sudah mencapai batas stok.', 'error'); return; }
+        existing.qty += 1;
+      } else cart.push({ id, qty: 1 });
+      saveCart(); renderCart(); updateBadges(); showToast(`${p.name} ditambahkan ke keranjang.`);
+    }
+
+    function cartDetails() {
+      return cart.map(item => { const product = products.find(p => p.id === item.id); return product ? { ...product, qty: Math.max(1, Number(item.qty) || 1), lineTotal: Number(product.price) * Math.max(1, Number(item.qty) || 1) } : null; }).filter(Boolean);
+    }
+
+    function renderCart() {
+      const details = cartDetails();
+      const itemsEl = $('#cart-items');
+      if (!details.length) {
+        const recentOrders = orders.slice().sort((a,b) => String(b.date || '').localeCompare(String(a.date || ''))).slice(0, 3);
+        const historyMarkup = recentOrders.length ? `<div class="mt-5 rounded-2xl border border-forest-100 p-4"><div class="mb-3 flex items-center justify-between"><h3 class="text-xs font-extrabold text-forest-900">Riwayat pesanan demo</h3><span class="text-[10px] font-semibold text-slate-400">${recentOrders.length} terakhir</span></div><div class="space-y-3">${recentOrders.map(order => `<div class="flex items-start justify-between gap-3 border-t border-forest-50 pt-3"><div class="min-w-0"><p class="truncate text-xs font-extrabold text-forest-900">${escapeHTML(order.id || 'Pesanan demo')}</p><p class="mt-1 text-[10px] text-slate-500">${dateID(order.date)} · ${escapeHTML(order.buyer || 'Pemesan')}</p></div><strong class="shrink-0 text-xs text-forest-800">${rupiah(order.subtotal)}</strong></div>`).join('')}</div></div>` : '';
+        itemsEl.innerHTML = `<div class="flex min-h-[250px] flex-col items-center justify-center text-center"><span class="grid h-16 w-16 place-items-center rounded-3xl bg-forest-50 text-forest-600"><i data-lucide="shopping-basket" class="h-7 w-7"></i></span><h3 class="mt-4 font-display text-lg font-extrabold">Keranjang masih kosong</h3><p class="mt-2 max-w-[230px] text-sm leading-6 text-slate-500">Pilih hasil panen atau alat pertanian yang kamu butuhkan.</p><button id="cart-empty-shop" class="btn-primary mt-5 rounded-xl px-4 py-2.5 text-sm font-bold">Cari produk</button></div>${historyMarkup}`;
+        $('#checkout-button').disabled = true;
+      } else {
+        itemsEl.innerHTML = details.map(item => `<article class="flex gap-3 rounded-2xl border border-forest-100 p-3"><img src="${escapeHTML(item.image || '')}" alt="${escapeHTML(item.name)}" class="h-[84px] w-[84px] shrink-0 rounded-xl bg-forest-50 object-cover" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=300&q=70'"/><div class="min-w-0 flex-1"><div class="flex items-start justify-between gap-2"><div class="min-w-0"><h3 class="line-clamp-2 text-sm font-extrabold leading-5 text-forest-900">${escapeHTML(item.name)}</h3><p class="mt-1 text-[11px] text-slate-500">${rupiah(item.price)} / ${escapeHTML(item.unit)}</p></div><button class="remove-cart p-1 text-slate-400 hover:text-rose-600" data-id="${escapeHTML(item.id)}" aria-label="Hapus ${escapeHTML(item.name)}"><i data-lucide="trash-2" class="h-4 w-4"></i></button></div><div class="mt-3 flex items-center justify-between gap-3"><div class="flex items-center rounded-lg border border-forest-100"><button class="qty-change grid h-7 w-7 place-items-center text-forest-700 hover:bg-forest-50" data-id="${escapeHTML(item.id)}" data-delta="-1" aria-label="Kurangi jumlah"><i data-lucide="minus" class="h-3 w-3"></i></button><span class="min-w-[26px] text-center text-xs font-extrabold">${item.qty}</span><button class="qty-change grid h-7 w-7 place-items-center text-forest-700 hover:bg-forest-50 disabled:opacity-30" data-id="${escapeHTML(item.id)}" data-delta="1" aria-label="Tambah jumlah" ${item.qty >= Number(item.stock) ? 'disabled' : ''}><i data-lucide="plus" class="h-3 w-3"></i></button></div><span class="text-sm font-extrabold text-forest-900">${rupiah(item.lineTotal)}</span></div></div></article>`).join('');
+        $('#checkout-button').disabled = false;
+      }
+      const subtotal = details.reduce((sum, p) => sum + p.lineTotal, 0);
+      $('#cart-subtotal').textContent = rupiah(subtotal);
+      $('#cart-subtitle').textContent = `${details.reduce((sum, item) => sum + item.qty, 0)} produk dipilih`;
+      updateBadges(); iconRefresh();
+    }
+
+    function openCart() { $('#cart-overlay').classList.add('open'); $('#cart-drawer').classList.add('open'); $('#cart-drawer').setAttribute('aria-hidden','false'); document.body.classList.add('modal-open'); $('#close-cart').focus(); }
+    function closeCart() { $('#cart-overlay').classList.remove('open'); $('#cart-drawer').classList.remove('open'); $('#cart-drawer').setAttribute('aria-hidden','true'); document.body.classList.remove('modal-open'); $('#cart-button').focus(); }
+
+    function openModal(title, content, eyebrow = 'AgriHub Pintar') {
+      modalReturnFocus = document.activeElement;
+      $('#modal-title').textContent = title; $('#modal-eyebrow').textContent = eyebrow; $('#modal-content').innerHTML = content;
+      const backdrop = $('#modal-backdrop'); backdrop.classList.add('open'); backdrop.setAttribute('aria-hidden','false'); document.body.classList.add('modal-open');
+      iconRefresh(); const first = $('input:not([type="hidden"]), select, textarea, button', $('#modal-content')); if (first) setTimeout(() => first.focus(), 20);
+    }
+    function closeModal() {
+      $('#modal-backdrop').classList.remove('open'); $('#modal-backdrop').setAttribute('aria-hidden','true'); document.body.classList.remove('modal-open');
+      if (modalReturnFocus && typeof modalReturnFocus.focus === 'function') modalReturnFocus.focus();
+    }
+
+    function openSellModal() {
+      if (!currentUser) { showAuth('register'); $('#register-role').value='seller'; setAuthFeedback('register','Daftar sebagai penjual untuk memasang produk. Jika sudah punya akun, pilih “Sudah punya akun? Masuk”.'); return; }
+      if (currentUser.role !== 'seller' && currentUser.role !== 'superadmin') { showToast('Akun pembeli tidak dapat memasang listing. Daftar sebagai penjual untuk menjual produk.', 'error'); return; }
+      openModal('Pasang produk baru', `<form id="sell-form" class="space-y-4">
+        <p class="rounded-xl bg-forest-50 px-3.5 py-3 text-xs leading-5 text-forest-800">Listing yang kamu tambahkan akan muncul pada katalog di browser ini. Untuk menerima pesanan secara publik, hubungkan ke backend dan sistem akun penjual.</p>
+        <div><label class="mb-1.5 block text-xs font-bold text-slate-700" for="sell-name">Nama produk *</label><input id="sell-name" name="name" class="field" maxlength="90" placeholder="Contoh: Jagung pipil kering" required /></div>
+        <div class="grid gap-4 sm:grid-cols-2"><div><label class="mb-1.5 block text-xs font-bold text-slate-700" for="sell-category">Kategori *</label><select id="sell-category" name="category" class="field" required><option value="Pangan Pokok">Pangan pokok</option><option value="Sayuran">Sayuran</option><option value="Alsintan">Alat pertanian</option><option value="Input Pertanian">Input pertanian</option><option value="Lainnya">Lainnya</option></select></div><div><label class="mb-1.5 block text-xs font-bold text-slate-700" for="sell-subcategory">Jenis listing</label><select id="sell-subcategory" name="subcategory" class="field"><option value="Hasil Panen">Hasil panen</option><option value="Alat Pertanian">Alat pertanian</option><option value="Sarana Produksi">Sarana produksi</option><option value="Lainnya">Lainnya</option></select></div>
+        <div><label class="mb-1.5 block text-xs font-bold text-slate-700" for="sell-price">Harga (Rp) *</label><input id="sell-price" name="price" class="field" type="number" min="1" step="1" placeholder="6200" required /></div><div><label class="mb-1.5 block text-xs font-bold text-slate-700" for="sell-unit">Satuan *</label><select id="sell-unit" name="unit" class="field"><option value="kg">kg</option><option value="karung">karung</option><option value="ikat">ikat</option><option value="liter">liter</option><option value="unit">unit</option><option value="paket">paket</option></select></div>
+        <div><label class="mb-1.5 block text-xs font-bold text-slate-700" for="sell-stock">Jumlah stok *</label><input id="sell-stock" name="stock" class="field" type="number" min="1" step="1" placeholder="100" required /></div><div><label class="mb-1.5 block text-xs font-bold text-slate-700" for="sell-location">Lokasi *</label><input id="sell-location" name="location" class="field" maxlength="100" placeholder="Desa / Kabupaten" required /></div>
+        <div class="sm:col-span-2"><label class="mb-1.5 block text-xs font-bold text-slate-700" for="sell-seller">Nama penjual *</label><input id="sell-seller" name="seller" class="field" maxlength="70" value="${escapeHTML(currentUser?.name || '')}" placeholder="Nama petani / kelompok tani" required /></div><div class="sm:col-span-2"><label class="mb-1.5 block text-xs font-bold text-slate-700" for="sell-description">Deskripsi produk</label><textarea id="sell-description" name="description" class="field min-h-[86px] resize-y" maxlength="500" placeholder="Kualitas, masa panen, kondisi produk, atau keterangan lain..."></textarea></div></div>
+        <div class="flex flex-col-reverse gap-2 border-t border-forest-100 pt-4 sm:flex-row sm:justify-end"><button type="button" class="btn-outline rounded-xl px-4 py-3 text-sm font-bold" data-modal-cancel>Batal</button><button class="btn-primary inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-extrabold" type="submit"><i data-lucide="package-plus" class="h-4 w-4"></i> Terbitkan listing</button></div>
+      </form>`, 'Marketplace · Penjual');
+    }
+
+    function openRecordModal(prefill = {}) {
+      const isPrefill = Object.keys(prefill).length > 0;
+      openModal(isPrefill ? 'Simpan hasil kalkulasi' : 'Tambah catatan usaha', `<form id="record-form" class="space-y-4">
+        <p class="rounded-xl bg-forest-50 px-3.5 py-3 text-xs leading-5 text-forest-800">Catatan berisi pendapatan, biaya produksi, dan hasil akhirnya. Gunakan satu catatan untuk satu komoditas atau satu siklus produksi.</p>
+        <div><label class="mb-1.5 block text-xs font-bold text-slate-700" for="record-crop">Nama komoditas / kegiatan *</label><input id="record-crop" class="field" name="crop" maxlength="90" placeholder="Contoh: Jagung musim tanam 1" value="${escapeHTML(prefill.crop || '')}" required /></div>
+        <div class="grid gap-4 sm:grid-cols-2"><div><label class="mb-1.5 block text-xs font-bold text-slate-700" for="record-date">Tanggal *</label><input id="record-date" class="field" name="date" type="date" value="${escapeHTML(prefill.date || nowISO())}" required /></div><div><label class="mb-1.5 block text-xs font-bold text-slate-700" for="record-area">Luas lahan (ha)</label><input id="record-area" class="field" name="area" type="number" min="0" step="0.01" value="${escapeHTML(prefill.area ?? '')}" placeholder="Mis. 0,5" /></div>
+        <div><label class="mb-1.5 block text-xs font-bold text-slate-700" for="record-revenue">Pendapatan (Rp) *</label><input id="record-revenue" class="field" name="revenue" type="number" min="0" step="1" value="${escapeHTML(prefill.revenue ?? '')}" placeholder="0" required /></div><div><label class="mb-1.5 block text-xs font-bold text-slate-700" for="record-cost">Total biaya (Rp) *</label><input id="record-cost" class="field" name="cost" type="number" min="0" step="1" value="${escapeHTML(prefill.cost ?? '')}" placeholder="0" required /></div></div>
+        <div><label class="mb-1.5 block text-xs font-bold text-slate-700" for="record-notes">Catatan tambahan</label><textarea id="record-notes" class="field min-h-[90px] resize-y" name="notes" maxlength="600" placeholder="Catat kendala, kualitas hasil, harga pasar, atau rencana perbaikan...">${escapeHTML(prefill.notes || '')}</textarea></div>
+        <div class="rounded-xl border border-forest-100 bg-white px-4 py-3"><div class="flex items-center justify-between text-xs"><span class="font-semibold text-slate-500">Laba / rugi dari angka di atas</span><strong id="record-profit-preview" class="font-display text-sm font-extrabold text-forest-800">${rupiah((Number(prefill.revenue)||0)-(Number(prefill.cost)||0))}</strong></div></div>
+        <div class="flex flex-col-reverse gap-2 border-t border-forest-100 pt-4 sm:flex-row sm:justify-end"><button type="button" class="btn-outline rounded-xl px-4 py-3 text-sm font-bold" data-modal-cancel>Batal</button><button class="btn-primary inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-extrabold" type="submit"><i data-lucide="save" class="h-4 w-4"></i> Simpan catatan</button></div>
+      </form>`, 'Buku usaha digital');
+      const rev = $('#record-revenue'); const cost = $('#record-cost'); const preview = $('#record-profit-preview');
+      const updatePreview = () => { const profit = (Number(rev.value)||0) - (Number(cost.value)||0); preview.textContent = rupiah(profit); preview.className = `font-display text-sm font-extrabold ${profit < 0 ? 'text-rose-600' : 'text-forest-800'}`; };
+      rev.addEventListener('input', updatePreview); cost.addEventListener('input', updatePreview);
+    }
+
+    function renderRecords() {
+      const totalRevenue = records.reduce((sum, r) => sum + (Number(r.revenue)||0), 0);
+      const totalCost = records.reduce((sum, r) => sum + (Number(r.cost)||0), 0);
+      const totalProfit = totalRevenue-totalCost;
+      $('#records-revenue').textContent = rupiah(totalRevenue); $('#records-cost').textContent = rupiah(totalCost);
+      $('#records-profit').textContent = rupiah(totalProfit); $('#records-profit').classList.toggle('text-rose-600', totalProfit < 0); $('#records-profit').classList.toggle('text-forest-900', totalProfit >= 0);
+      $('#records-count').textContent = `${records.length} catatan tersimpan`;
+      const query = $('#record-search').value.trim().toLocaleLowerCase('id-ID');
+      const visible = records.filter(r => [r.crop,r.notes,r.date].some(v => String(v||'').toLocaleLowerCase('id-ID').includes(query))).sort((a,b) => String(b.date).localeCompare(String(a.date)));
+      $('#records-body').innerHTML = visible.map(r => { const profit = (Number(r.revenue)||0)-(Number(r.cost)||0); return `<tr class="hover:bg-[#fbfcfa]"><td class="px-5 py-4"><div class="font-bold text-forest-900">${escapeHTML(r.crop)}</div><div class="mt-1 max-w-[240px] truncate text-[10px] text-slate-400">${escapeHTML(r.notes || (r.area ? `Luas ${numberID(Number(r.area),2)} ha` : 'Tanpa catatan tambahan'))}</div></td><td class="whitespace-nowrap px-4 py-4 text-xs text-slate-500">${dateID(r.date)}</td><td class="whitespace-nowrap px-4 py-4 text-right text-xs font-semibold text-forest-800">${rupiah(r.revenue)}</td><td class="whitespace-nowrap px-4 py-4 text-right text-xs font-semibold text-slate-600">${rupiah(r.cost)}</td><td class="whitespace-nowrap px-4 py-4 text-right text-xs font-extrabold ${profit < 0 ? 'text-rose-600' : 'text-emerald-700'}">${profit < 0 ? '−' : ''}${rupiah(Math.abs(profit))}</td><td class="whitespace-nowrap px-5 py-4 text-right"><button class="delete-record inline-flex h-8 items-center justify-center gap-1 rounded-lg px-2 text-xs font-bold text-slate-400 hover:bg-rose-50 hover:text-rose-600" data-id="${escapeHTML(r.id)}" aria-label="Hapus catatan ${escapeHTML(r.crop)}"><i data-lucide="trash-2" class="h-3.5 w-3.5"></i> Hapus</button></td></tr>`; }).join('');
+      const empty = visible.length === 0; $('#records-table-wrap').classList.toggle('hidden', empty); $('#empty-records').classList.toggle('hidden', !empty);
+      iconRefresh();
+    }
+
+    function csvCell(value) { const text = String(value ?? ''); return `"${text.replace(/"/g,'""')}"`; }
+    function exportRecords() {
+      if (!records.length) { showToast('Belum ada catatan untuk diekspor.', 'info'); return; }
+      const rows = [['Komoditas / kegiatan','Tanggal','Luas lahan (ha)','Pendapatan (Rp)','Biaya (Rp)','Laba/rugi (Rp)','Catatan']];
+      records.forEach(r => rows.push([r.crop,r.date,r.area ?? '',Number(r.revenue)||0,Number(r.cost)||0,(Number(r.revenue)||0)-(Number(r.cost)||0),r.notes||'']));
+      const csv = '\uFEFF' + rows.map(row => row.map(csvCell).join(';')).join('\r\n');
+      const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `catatan-usaha-tani-${nowISO()}.csv`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); showToast('File CSV berhasil disiapkan.');
+    }
+
+    function readCalculator() {
+      const val = id => Math.max(0, Number($(id).value) || 0);
+      const yieldKg = val('#calc-yield'); const price = val('#calc-price');
+      const costs = val('#cost-land') + val('#cost-seed') + val('#cost-fertilizer') + val('#cost-pest') + val('#cost-labor') + val('#cost-other');
+      const revenue = yieldKg * price; const profit = revenue-costs; const margin = revenue > 0 ? profit/revenue*100 : 0; const roi = costs > 0 ? profit/costs*100 : (profit > 0 ? null : 0);
+      return { crop: $('#calc-crop').value, area: val('#calc-area'), yieldKg, price, costs, revenue, profit, margin, roi };
+    }
+    function updateCalculator() {
+      const c = readCalculator();
+      $('#calc-revenue').textContent = rupiah(c.revenue); $('#calc-total-cost').textContent = rupiah(c.costs); $('#calc-profit').textContent = `${c.profit < 0 ? '−' : ''}${rupiah(Math.abs(c.profit))}`;
+      $('#calc-profit').classList.toggle('text-rose-300', c.profit < 0); $('#calc-profit').classList.toggle('text-harvest-300', c.profit >= 0);
+      $('#calc-margin').textContent = `${numberID(c.margin,1)}%`; $('#calc-roi').textContent = c.roi === null ? '—' : `${numberID(c.roi,1)}%`;
+      $('#calc-status').textContent = c.revenue === 0 && c.costs === 0 ? 'Isi hasil panen dan biaya untuk melihat estimasi usaha.' : c.profit < 0 ? 'Perhatian: biaya lebih besar dari pendapatan pada angka yang dimasukkan. Coba tinjau biaya atau harga jual.' : c.profit === 0 ? 'Titik impas: pendapatan sama dengan total biaya.' : 'Estimasi ini belum termasuk biaya yang tidak dimasukkan, perubahan harga, risiko panen, atau pajak.';
+      return c;
+    }
+    function resetCalculator() {
+      // Defaults are reapplied explicitly because reset events fire before the browser finishes restoring default values.
+      setTimeout(() => { $('#calc-area').value='1'; $('#calc-yield').value='5000'; $('#calc-price').value='6200'; $('#cost-land').value='800000'; $('#cost-seed').value='450000'; $('#cost-fertilizer').value='1200000'; $('#cost-pest').value='350000'; $('#cost-labor').value='1500000'; $('#cost-other').value='400000'; $('#calc-crop').value='Jagung'; updateCalculator(); }, 0);
+    }
+
+    function openOrderSummary() {
+      const details = cartDetails(); if (!details.length) { showToast('Keranjang masih kosong.', 'error'); return; }
+      const subtotal = details.reduce((sum,item) => sum+item.lineTotal,0);
+      const orderId = `AGH-${nowISO().replaceAll('-','')}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;
+      openModal('Ringkasan pesanan', `<div class="space-y-4"><div class="flex items-start gap-3 rounded-2xl bg-forest-50 p-4"><span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white text-forest-700"><i data-lucide="clipboard-check" class="h-5 w-5"></i></span><div><p class="text-sm font-extrabold text-forest-900">Pesanan siap ditinjau</p><p class="mt-1 text-xs leading-5 text-slate-500">ID simulasi: <strong>${escapeHTML(orderId)}</strong>. Belum ada pembayaran atau pesanan yang dikirim kepada penjual.</p></div></div>
+        <div class="divide-y divide-forest-100 rounded-2xl border border-forest-100">${details.map(item => `<div class="flex items-center justify-between gap-3 px-4 py-3"><div class="min-w-0"><p class="truncate text-sm font-bold text-forest-900">${escapeHTML(item.name)}</p><p class="mt-1 text-[11px] text-slate-500">${item.qty} × ${rupiah(item.price)}</p></div><strong class="shrink-0 text-sm">${rupiah(item.lineTotal)}</strong></div>`).join('')}<div class="flex items-center justify-between gap-3 bg-[#f8faf7] px-4 py-4"><span class="text-sm font-bold text-slate-600">Subtotal estimasi</span><strong class="font-display text-lg font-extrabold text-forest-900">${rupiah(subtotal)}</strong></div></div>
+        <form id="order-form" class="space-y-3"><div><label for="order-buyer" class="mb-1.5 block text-xs font-bold text-slate-700">Nama pemesan *</label><input id="order-buyer" name="buyer" class="field" maxlength="80" required value="${escapeHTML(currentUser?.name || '')}" placeholder="Nama lengkap" /></div><div><label for="order-contact" class="mb-1.5 block text-xs font-bold text-slate-700">Kontak (opsional)</label><input id="order-contact" name="contact" class="field" maxlength="80" placeholder="Nomor telepon atau email" /></div><div><label for="order-address" class="mb-1.5 block text-xs font-bold text-slate-700">Lokasi / catatan pengiriman *</label><textarea id="order-address" name="address" class="field min-h-[72px]" maxlength="300" placeholder="Kabupaten/kecamatan dan kebutuhan pengiriman" required></textarea></div><p class="text-[11px] leading-5 text-slate-400">Melanjutkan akan menyimpan simulasi pesanan di browser ini dan mengosongkan keranjang. Tidak ada transaksi uang sungguhan.</p><div class="flex flex-col-reverse gap-2 border-t border-forest-100 pt-4 sm:flex-row sm:justify-end"><button type="button" class="btn-outline rounded-xl px-4 py-3 text-sm font-bold" data-modal-cancel>Kembali ke keranjang</button><button class="btn-primary inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-extrabold" type="submit"><i data-lucide="check-circle-2" class="h-4 w-4"></i> Simpan simulasi</button></div></form></div>`, 'Checkout · Simulasi');
+      $('#order-form').addEventListener('submit', event => {
+        event.preventDefault(); const form = event.currentTarget; if (!form.reportValidity()) return;
+        const fd = new FormData(form); const order = { id: orderId, date: nowISO(), buyer: String(fd.get('buyer')||'').trim(), buyerEmail: currentUser?.email || '', contact: String(fd.get('contact')||'').trim(), address: String(fd.get('address')||'').trim(), items: details.map(item => ({ id:item.id, name:item.name, qty:item.qty, price:item.price })), subtotal };
+        orders.push(order); saveOrders(); cart=[]; saveCart(); renderCart(); renderProducts(); closeModal(); closeCart(); showToast(`Simulasi pesanan ${orderId} disimpan.`);
+      });
+    }
+
+    // Product and cart event delegation
+    $('#product-grid').addEventListener('click', event => {
+      const favButton = event.target.closest('.favorite-toggle'); if (favButton) { toggleFavorite(favButton.dataset.id); return; }
+      const cartButton = event.target.closest('.add-cart'); if (cartButton && !cartButton.disabled) addToCart(cartButton.dataset.id);
+    });
+    $('#category-filters').addEventListener('click', event => { const button = event.target.closest('[data-category]'); if (button) { onlyFavorites=false; setCategory(button.dataset.category); } });
+    $('#product-search').addEventListener('input', renderProducts);
+    $('#sort-products').addEventListener('change', renderProducts);
+    $('#reset-filters').addEventListener('click', () => { $('#product-search').value=''; $('#sort-products').value='recommended'; onlyFavorites=false; setCategory('Semua'); showToast('Filter marketplace direset.', 'info'); });
+    $('#empty-reset').addEventListener('click', () => { $('#product-search').value=''; onlyFavorites=false; setCategory('Semua'); });
+    $('#favorites-shortcut').addEventListener('click', () => { onlyFavorites=true; $('#product-search').value=''; setCategory('Semua'); $('#marketplace').scrollIntoView({behavior:'smooth'}); });
+    $('#show-favorites').addEventListener('click', () => { onlyFavorites=!onlyFavorites; renderProducts(); if(onlyFavorites) $('#marketplace').scrollIntoView({behavior:'smooth'}); });
+    $('#open-sell-modal').addEventListener('click', openSellModal);
+
+    $('#cart-button').addEventListener('click', () => { renderCart(); openCart(); });
+    $('#close-cart').addEventListener('click', closeCart); $('#continue-shopping').addEventListener('click', closeCart); $('#cart-overlay').addEventListener('click', closeCart);
+    $('#cart-items').addEventListener('click', event => {
+      const remove = event.target.closest('.remove-cart'); if (remove) { cart=cart.filter(item => item.id!==remove.dataset.id); saveCart(); renderCart(); showToast('Produk dihapus dari keranjang.', 'info'); return; }
+      const qtyButton = event.target.closest('.qty-change'); if (qtyButton && !qtyButton.disabled) { const item=cart.find(x=>x.id===qtyButton.dataset.id); const product=products.find(x=>x.id===qtyButton.dataset.id); if(!item||!product)return; const next=item.qty+Number(qtyButton.dataset.delta); if(next<=0) cart=cart.filter(x=>x.id!==item.id); else if(next<=Number(product.stock)) item.qty=next; else showToast('Jumlah melebihi stok yang tersedia.', 'error'); saveCart(); renderCart(); return; }
+      if (event.target.closest('#cart-empty-shop')) { closeCart(); $('#marketplace').scrollIntoView({behavior:'smooth'}); }
+    });
+    $('#checkout-button').addEventListener('click', openOrderSummary);
+
+    // Modal delegation for dynamically rendered forms
+    $('#modal-close').addEventListener('click', closeModal);
+    $('#modal-backdrop').addEventListener('click', event => { if (event.target === $('#modal-backdrop')) closeModal(); });
+    $('#modal-content').addEventListener('click', event => { if (event.target.closest('[data-modal-cancel]')) closeModal(); });
+    $('#modal-content').addEventListener('change', event => {
+      if (event.target.id !== 'sell-category') return;
+      const subcategory = $('#sell-subcategory');
+      const mapped = event.target.value === 'Alsintan' ? 'Alat Pertanian' : event.target.value === 'Input Pertanian' ? 'Sarana Produksi' : event.target.value === 'Lainnya' ? 'Lainnya' : 'Hasil Panen';
+      subcategory.value = mapped;
+    });
+    $('#modal-content').addEventListener('submit', event => {
+      const form = event.target; if (form.id === 'sell-form') {
+        event.preventDefault(); if (!form.reportValidity()) return;
+        const fd = new FormData(form); const name=String(fd.get('name')||'').trim(); const category=String(fd.get('category')||''); const subcategory=String(fd.get('subcategory')||''); const price=Number(fd.get('price')); const stock=Number(fd.get('stock')); const location=String(fd.get('location')||'').trim(); const seller=String(fd.get('seller')||'').trim();
+        if (!name || !location || !seller || !Number.isFinite(price) || price<=0 || !Number.isFinite(stock) || stock<1) { showToast('Periksa kembali data listing.', 'error'); return; }
+        products.unshift({ id:`user-${makeId()}`, name, category, subcategory, price, unit:String(fd.get('unit')||'unit'), stock, location, seller, ownerEmail:currentUser?.email || '', status:'active', rating:0, badge:'Listing baru', image:'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=80', description:String(fd.get('description')||'').trim() || 'Produk ditambahkan melalui AgriHub Pintar.', createdAt:new Date().toISOString() });
+        saveProducts(); onlyFavorites=false; currentCategory='Semua'; $('#product-search').value=''; $('#sort-products').value='newest'; setCategory('Semua'); closeModal(); showToast('Listing produk berhasil ditambahkan.'); $('#marketplace').scrollIntoView({behavior:'smooth'});
+      }
+      if (form.id === 'record-form') {
+        event.preventDefault(); if (!form.reportValidity()) return;
+        const fd = new FormData(form); const crop=String(fd.get('crop')||'').trim(); const date=String(fd.get('date')||''); const revenue=Number(fd.get('revenue')); const cost=Number(fd.get('cost')); const area=fd.get('area') === '' ? null : Number(fd.get('area'));
+        if (!crop || !date || !Number.isFinite(revenue) || revenue<0 || !Number.isFinite(cost) || cost<0 || (area !== null && (!Number.isFinite(area)||area<0))) { showToast('Periksa kembali data catatan.', 'error'); return; }
+        records.unshift({ id:makeId(), crop, date, area, revenue, cost, notes:String(fd.get('notes')||'').trim(), ownerEmail:currentUser?.email || '', createdAt:new Date().toISOString() }); saveRecords(); renderRecords(); closeModal(); showToast('Catatan usaha berhasil disimpan.');
+      }
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') { if ($('#modal-backdrop').classList.contains('open')) closeModal(); else if ($('#cart-drawer').classList.contains('open')) closeCart(); }
+      if (event.key === 'Tab' && $('#modal-backdrop').classList.contains('open')) {
+        const focusable = $$('button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href]', $('#modal-backdrop')).filter(el => el.offsetParent !== null);
+        if (!focusable.length) return; const first=focusable[0], last=focusable[focusable.length-1];
+        if (event.shiftKey && document.activeElement===first) { event.preventDefault(); last.focus(); } else if (!event.shiftKey && document.activeElement===last) { event.preventDefault(); first.focus(); }
+      }
+    });
+
+    // Records table and export
+    $('#open-record-modal').addEventListener('click', () => openRecordModal());
+    $('#empty-add-record').addEventListener('click', () => openRecordModal());
+    $('#record-search').addEventListener('input', renderRecords);
+    $('#records-body').addEventListener('click', event => { const button=event.target.closest('.delete-record'); if(!button)return; const record=records.find(r=>r.id===button.dataset.id); if(!record)return; if(!window.confirm(`Hapus catatan "${record.crop}"? Tindakan ini tidak dapat dibatalkan.`)) return; records=records.filter(r=>r.id!==record.id); saveRecords(); renderRecords(); showToast('Catatan berhasil dihapus.', 'info'); });
+    $('#export-records').addEventListener('click', exportRecords);
+    $('#save-calculation').addEventListener('click', () => { const c=updateCalculator(); if (!c.crop || c.area <= 0 || c.yieldKg < 0 || c.price < 0) { showToast('Periksa angka kalkulator sebelum menyimpan.', 'error'); return; } openRecordModal({ crop:`${c.crop} · ${numberID(c.area,2)} ha`, date:nowISO(), area:c.area, revenue:Math.round(c.revenue), cost:Math.round(c.costs), notes:`Perkiraan hasil ${numberID(c.yieldKg)} kg dengan harga ${rupiah(c.price)}/kg. Laba/rugi estimasi ${rupiah(c.profit)}.` }); });
+    $('#profit-form').addEventListener('input', updateCalculator);
+    $('#profit-form').addEventListener('change', updateCalculator);
+    $('#profit-form').addEventListener('reset', resetCalculator);
+
+    // Navigation and motion
+    $('#mobile-menu-button').addEventListener('click', () => { const menu=$('#mobile-menu'); const willOpen=menu.classList.contains('hidden'); menu.classList.toggle('hidden', !willOpen); $('#mobile-menu-button').setAttribute('aria-expanded', String(willOpen)); $('#mobile-menu-button').innerHTML = `<i data-lucide="${willOpen ? 'x' : 'menu'}" class="h-5 w-5"></i>`; iconRefresh(); });
+    $('#mobile-menu').addEventListener('click', event => { if (event.target.closest('a')) { $('#mobile-menu').classList.add('hidden'); $('#mobile-menu-button').setAttribute('aria-expanded','false'); $('#mobile-menu-button').innerHTML='<i data-lucide="menu" class="h-5 w-5"></i>'; iconRefresh(); } });
+    $('#current-year').textContent = new Date().getFullYear();
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } }), { threshold:0.12, rootMargin:'0px 0px -30px 0px' });
+      $$('.reveal:not(.is-visible)').forEach(element => observer.observe(element));
+    } else { $$('.reveal').forEach(element => element.classList.add('is-visible')); }
+
+    // Initial paint and account state
+    bindAuthAndDashboard();
+    initializeAuth().catch(() => { updateAccountButton(); });
+    renderProducts(); renderCart(); renderRecords(); updateCalculator(); iconRefresh();
+  })();
+  </script>
+</body>
+</html>
